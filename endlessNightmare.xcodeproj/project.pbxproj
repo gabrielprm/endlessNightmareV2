@@ -14,6 +14,7 @@
 		89B524E3269CAF6600C3FD33 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B524E2269CAF6600C3FD33 /* GameViewController.swift */; };
 		89B524E6269CAF6700C3FD33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B524E4269CAF6700C3FD33 /* Main.storyboard */; };
 		89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B524E7269CAF6700C3FD33 /* Assets.xcassets */; };
+		89B524F0269CB44100C3FD33 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 89B524EF269CB44100C3FD33 /* MyTileSet.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		89B524E5269CAF6700C3FD33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89B524E7269CAF6700C3FD33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89B524E9269CAF6700C3FD33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B524EF269CB44100C3FD33 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				89B524E4269CAF6700C3FD33 /* Main.storyboard */,
 				89B524E7269CAF6700C3FD33 /* Assets.xcassets */,
 				89B524E9269CAF6700C3FD33 /* Info.plist */,
+				89B524EF269CB44100C3FD33 /* MyTileSet.sks */,
 			);
 			path = endlessNightmare;
 			sourceTree = "<group>";
@@ -130,6 +133,7 @@
 				89B524E6269CAF6700C3FD33 /* Main.storyboard in Resources */,
 				89B524DD269CAF6600C3FD33 /* GameScene.sks in Resources */,
 				89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */,
+				89B524F0269CB44100C3FD33 /* MyTileSet.sks in Resources */,
 				89B524DF269CAF6600C3FD33 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
