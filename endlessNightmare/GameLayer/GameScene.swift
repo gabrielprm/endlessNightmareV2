@@ -5,6 +5,7 @@
 //  Created by Gabriel do Prado Moreira on 12/07/21.
 //
 
+import Foundation
 import SpriteKit
 import GameplayKit
 
@@ -17,7 +18,7 @@ class GameScene: SKScene {
         let mapa = MapGenerator(imageName: "chao", zPosition: 1)
         addChild(mapa)
         
-        let mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: 1310, y: 755), zPosition: 0)
+        let mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
         addChild(mapa2)
     }
     
