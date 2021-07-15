@@ -17,16 +17,18 @@ class GameScene: SKScene {
     var chao2 = SKSpriteNode()
     
     override func didMove(to view: SKView) {
-        chao = SKSpriteNode(texture: SKTexture( imageNamed: "chao"))
-        chao.zPosition = 0
-        addChild(chao)
-
-        chao2 = SKSpriteNode(texture: SKTexture( imageNamed: "chao"))
-        chao2.zPosition = -1
-        chao2.position.x = 1310
-        chao2.position.y = 755
+        let mapa = Map(imageName: "chao", zPosition: 0)
+        addChild(mapa.mapa)
+        
+//        chao2 = SKSpriteNode(texture: SKTexture( imageNamed: "chao"))
+//        chao2.zPosition = -1
+//        chao2.position.x = 1310
+//        chao2.position.y = 755
 //        chao2.position.x = 1310
 //        chao2.position.y = 765
+
+//            }
+//        }
     }
     
     
