@@ -14,18 +14,15 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     override func didMove(to view: SKView) {
+        let mapa = MapGenerator(imageName: "chao", zPosition: 1)
+        addChild(mapa)
         
-        let mapa = Map(imageName: "chao", zPosition: 1)
-        addChild(mapa.map)
-        
-        let mapa2 = Map(imageName: "chao", position: CGPoint(x: 1310, y: 755), zPosition: 0)
-        addChild(mapa2.map)
-        
+        let mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: 1310, y: 755), zPosition: 0)
+        addChild(mapa2)
     }
     
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

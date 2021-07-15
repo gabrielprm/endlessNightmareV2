@@ -8,20 +8,20 @@
 import SpriteKit
 import GameplayKit
 
-public class Map: SKNode{
-    var map: SKSpriteNode! = nil
-    let initialXPosition:CGFloat = 1310
-    let initialYPosition:CGFloat = 755
-    let movXCoefficient: CGFloat = -1
-    let movYCoefficient: CGFloat = -0.5773502691896257
+public class MapGenerator: SKSpriteNode{
+
+//    let initialXPosition:CGFloat = 1310
+//    let initialYPosition:CGFloat = 755
+//    let movXCoefficient: CGFloat = -1
+//    let movYCoefficient: CGFloat = -0.5773502691896257
     
-    init(imageName: String, position: CGPoint, zPosition: CGFloat){
+    init(imageName: String, position: CGPoint, zPosition: CGFloat) {
+        let texture = SKTexture(imageNamed: imageName)
         
-        super.init()
-        
-        map = SKSpriteNode(texture: SKTexture(imageNamed: imageName))
-        map.position = position
-        map.zPosition = zPosition
+        super.init(texture: texture, color: .clear, size: texture.size())
+
+        self.position = position
+        self.zPosition = zPosition
     }
     
     convenience init(imageName: String, zPosition: CGFloat) {
@@ -32,16 +32,15 @@ public class Map: SKNode{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateMap(map: SKSpriteNode, map2: SKSpriteNode){
-      
-        map.run(SKAction.moveBy(x: movXCoefficient, y: movYCoefficient, duration: 0.1))
-
-        if (map.position.x < -1310) {
-            map.position = map2.position
-            map2.position = CGPoint(x: initialXPosition, y: initialYPosition)
-        }
-       
-        map2.run(SKAction.moveBy(x: movXCoefficient, y: movYCoefficient, duration: 0.1))
-    }
+//    func updateMap(map: SKSpriteNode){
+//        run(SKAction.moveBy(x: movXCoefficient, y: movYCoefficient, duration: 0.1))
+//
+//        if (position.x < -1310) {
+//            position = map2.position
+//            map.position = CGPoint(x: initialXPosition, y: initialYPosition)
+//        }
+//
+//        map.run(SKAction.moveBy(x: movXCoefficient, y: movYCoefficient, duration: 0.1))
+//    }
     
 }
