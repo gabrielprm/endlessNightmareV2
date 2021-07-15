@@ -18,7 +18,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         let mapa = Map(imageName: "chao", zPosition: 0)
-        addChild(mapa.mapa)
+        addChild(mapa)
         
 //        chao2 = SKSpriteNode(texture: SKTexture( imageNamed: "chao"))
 //        chao2.zPosition = -1
@@ -26,9 +26,9 @@ class GameScene: SKScene {
 //        chao2.position.y = 755
 //        chao2.position.x = 1310
 //        chao2.position.y = 765
-
 //            }
 //        }
+        
     }
     
     
