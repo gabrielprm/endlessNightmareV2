@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class MapManager: SKNode{
+public class MapManager: SKNode{
     
     func updateMap(firstMap: SKSpriteNode, secondMap: SKSpriteNode){
         firstMap.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 0.1))
