@@ -17,6 +17,7 @@ public class MapGenerator: SKSpriteNode{
         super.init(texture: texture, color: .clear, size: texture.size())
         self.position = position
         self.zPosition = zPosition
+        self.isUserInteractionEnabled = true
     }
     
     convenience init(imageName: String, zPosition: CGFloat) {
@@ -26,7 +27,5 @@ public class MapGenerator: SKSpriteNode{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
 }

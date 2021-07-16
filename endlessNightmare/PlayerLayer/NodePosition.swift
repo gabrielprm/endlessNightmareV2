@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 
 public struct NodePosition {
+    
     static func nodePosition(row: Int) -> CGPoint {
         var x: CGFloat = 0
         var y: CGFloat = 0

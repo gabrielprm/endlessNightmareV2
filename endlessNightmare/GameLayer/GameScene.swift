@@ -14,22 +14,27 @@ class GameScene: SKScene {
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
+    var buttonPause: SKSpriteNode! = nil
+    var score: SKLabelNode! = nil
     var masterNode = SKNode()
     
     override func didMove(to view: SKView) {
-        mapa = MapGenerator(imageName: "chao-2", zPosition: 1)
+        buttonPause = childNode(withName: "button_pause") as? SKSpriteNode
+        score = childNode(withName: "score") as? SKLabelNode
+        
+        mapa = MapGenerator(imageName: "chao", zPosition: 1)
         addChild(mapa)
         
-        mapa2 = MapGenerator(imageName: "chao-2", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
+        mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
         addChild(mapa2)
         
-        character = characterGenerator()
+        character = CharacterGenerator()
         addChild(character)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeUp.direction = .up
         self.view!.addGestureRecognizer(swipeUp)
-
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
         self.view!.addGestureRecognizer(swipeDown)
@@ -38,16 +43,31 @@ class GameScene: SKScene {
         self.addChild(background)
         
         addChild(masterNode)
-        
     }
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Recupero a posição do toque com referência à minha scene. À minha tela.
         let touch = touches.first
-        // Enumero e recupero todos os nodes com o mesmo 'name' dentro da cena
-        let _ = touch?.location(in: self)
- 
+        
+        guard let touchLocation = touch?.location(in: self) else { return }
+        guard let node = nodes(at: touchLocation).first else { return }
+        guard let nodeName = node.name else { return }
+        
+        if nodeName == "button_pause" {
+            let buttonPlay = SKSpriteNode(imageNamed: "button_play")
+            buttonPlay.name = "button_play"
+            buttonPlay.zPosition = 999
+            buttonPlay.setScale(4)
+            
+            addChild(buttonPlay)
+            
+            node.isUserInteractionEnabled = true
+            isPaused = true
+        } else if nodeName == "button_play" {
+            node.removeFromParent()
+            
+            buttonPause.isUserInteractionEnabled = false
+            isPaused = false
+        }
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -76,17 +96,25 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
     }
+    
     var i = 0
+    var scoreInt = 0
     
     override func update(_ currentTime: TimeInterval) {
-        
         MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
         
-        if i > 120{
-            EnemyGenerator.enemyBorn(masterNode: masterNode)
+        if i > 120 {
+            EnemyManager.enemyBorn(masterNode: masterNode)
             i = 0
         }
-        MoveEnemy.Move(masterNode: masterNode)
+        
+        EnemyManager.move(masterNode: masterNode)
+        
+        if scoreInt % 60 == 0 {
+            score.text = "\(scoreInt / 60)"
+        }
+        
         i += 1
+        scoreInt += 1
     }
 }
