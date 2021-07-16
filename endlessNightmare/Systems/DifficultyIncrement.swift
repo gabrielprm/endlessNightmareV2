@@ -37,12 +37,4 @@ class DifficultyIncrement{
     
 }
 
-let teste = DifficultyIncrement(axysX: 1)
-
-var aux = true
-
-while aux{
-    teste.speedProgression()
-}
-
 
