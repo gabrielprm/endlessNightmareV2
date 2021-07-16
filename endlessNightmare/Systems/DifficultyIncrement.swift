@@ -7,28 +7,42 @@
 
 import SpriteKit
 
+@propertyWrapper
+private struct coefficientOfVelocityCalculator {
+    private var coefficient = 0.0
+    var wrappedValue: Double {
+        get { return coefficient }
+        set {
+            coefficient += newValue
+        }
+    }
+}
 
 class DifficultyIncrement{
     
-    @propertyWrapper
-    private struct coefficientOfVelocityCalculator {
-        private var coefficient = 0.0
-        var wrappedValue: Double {
-            get { return coefficient }
-            set {
-                coefficient = newValue * (log2(newValue) / 2)
-            }
-        }
-    }
+    var axysX:Double
     
+    init(axysX:CGFloat) {
+        self.axysX = Double(axysX)
+    }
+
     @coefficientOfVelocityCalculator private var difficultyCounter:Double
     
-    func speedProgression(xMap:CGFloat) -> Double{
+    func speedProgression() -> Double{
         
-        let x = Double(xMap)
-        difficultyCounter = x
+        difficultyCounter = axysX
         
         return difficultyCounter
     }
     
 }
+
+let teste = DifficultyIncrement(axysX: 1)
+
+var aux = true
+
+while aux{
+    teste.speedProgression()
+}
+
+
