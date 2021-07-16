@@ -14,7 +14,7 @@ class Background: SKSpriteNode {
         let background = SKTexture(imageNamed: "Background")
         
         super.init(texture: background, color: .clear, size: background.size())
-        
+        self.setScale(1.5)
         self.position = position
         self.zPosition = -1
     }
