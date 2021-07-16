@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221CC39B26A2122400118D80 /* MoveEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC39A26A2122400118D80 /* MoveEnemy.swift */; };
 		894BEC7526A097200032BE71 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7426A097200032BE71 /* PauseMenu.swift */; };
 		894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7626A097610032BE71 /* DifficultyIncrement.swift */; };
 		894BEC7926A097770032BE71 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7826A097770032BE71 /* MapGenerator.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221CC39A26A2122400118D80 /* MoveEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveEnemy.swift; sourceTree = "<group>"; };
 		894BEC7426A097200032BE71 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
 		894BEC7626A097610032BE71 /* DifficultyIncrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyIncrement.swift; sourceTree = "<group>"; };
 		894BEC7826A097770032BE71 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
@@ -61,12 +63,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221CC39C26A2158E00118D80 /* EnemyLayer */ = {
+			isa = PBXGroup;
+			children = (
+				894BEC7A26A097870032BE71 /* EnemyGenerator.swift */,
+				221CC39A26A2122400118D80 /* MoveEnemy.swift */,
+			);
+			path = EnemyLayer;
+			sourceTree = "<group>";
+		};
 		894BEC6C26A095A90032BE71 /* GameLayer */ = {
 			isa = PBXGroup;
 			children = (
 				89B524DE269CAF6600C3FD33 /* Actions.sks */,
-				89B524DC269CAF6600C3FD33 /* GameScene.sks */,
 				89B524E0269CAF6600C3FD33 /* GameScene.swift */,
+				89B524DC269CAF6600C3FD33 /* GameScene.sks */,
 			);
 			path = GameLayer;
 			sourceTree = "<group>";
@@ -100,7 +111,6 @@
 			children = (
 				89B524DA269CAF6600C3FD33 /* AppDelegate.swift */,
 				894BEC7626A097610032BE71 /* DifficultyIncrement.swift */,
-				894BEC7A26A097870032BE71 /* EnemyGenerator.swift */,
 				89B524E2269CAF6600C3FD33 /* GameViewController.swift */,
 				894BEC7826A097770032BE71 /* MapGenerator.swift */,
 				894BEC8326A0C2880032BE71 /* MapData.swift */,
@@ -145,6 +155,7 @@
 		89B524D9269CAF6600C3FD33 /* endlessNightmare */ = {
 			isa = PBXGroup;
 			children = (
+				221CC39C26A2158E00118D80 /* EnemyLayer */,
 				894BEC7C26A0979A0032BE71 /* PlayerLayer */,
 				894BEC7126A096260032BE71 /* UIElements */,
 				894BEC7026A0960B0032BE71 /* Systems */,
@@ -244,6 +255,7 @@
 				89B524DB269CAF6600C3FD33 /* AppDelegate.swift in Sources */,
 				894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */,
 				894BEC8226A0990F0032BE71 /* Background.swift in Sources */,
+				221CC39B26A2122400118D80 /* MoveEnemy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +395,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6D5984MR54;
+				DEVELOPMENT_TEAM = 53RZF4C2P7;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -402,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6D5984MR54;
+				DEVELOPMENT_TEAM = 53RZF4C2P7;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
