@@ -12,13 +12,15 @@ import GameplayKit
 class GameScene: SKScene {
     
     var character: SKNode! = nil
+    var mapa: SKSpriteNode! = nil
+    var mapa2: SKSpriteNode! = nil
     var masterNode = SKNode()
     
     override func didMove(to view: SKView) {
-        let mapa = MapGenerator(imageName: "chao-2", zPosition: 1)
+        mapa = MapGenerator(imageName: "chao-2", zPosition: 1)
         addChild(mapa)
         
-        let mapa2 = MapGenerator(imageName: "chao-2", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
+        mapa2 = MapGenerator(imageName: "chao-2", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
         addChild(mapa2)
         
         character = characterGenerator()
@@ -77,6 +79,8 @@ class GameScene: SKScene {
     var i = 0
     
     override func update(_ currentTime: TimeInterval) {
+        
+        MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
         
         if i > 120{
             EnemyGenerator.enemyBorn(masterNode: masterNode)

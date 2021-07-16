@@ -11,7 +11,7 @@ import GameplayKit
 
 public class MapManager: SKNode{
     
-    func updateMap(firstMap: SKSpriteNode, secondMap: SKSpriteNode){
+    static func updateMap(firstMap: SKSpriteNode, secondMap: SKSpriteNode){
         firstMap.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 0.1))
 
         if (firstMap.position.x < -1310) {
@@ -19,6 +19,6 @@ public class MapManager: SKNode{
             secondMap.position = CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap)
         }
 
-        secondMap.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movXCoefficient, duration: 0.1))
+        secondMap.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 0.1))
     }
 }
