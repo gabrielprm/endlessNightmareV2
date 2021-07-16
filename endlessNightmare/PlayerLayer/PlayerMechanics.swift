@@ -7,7 +7,7 @@
 
 import Foundation
 import SpriteKit
-
+//Comentario pra testar commit
 public class PlayerMechanics {
     static func moveDown(_ character: SKNode){
         switch characterGenerator.rowPosition {
