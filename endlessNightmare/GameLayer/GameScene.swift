@@ -30,6 +30,9 @@ class GameScene: SKScene {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
         self.view!.addGestureRecognizer(swipeDown)
+        
+        let background = Background(position: CGPoint(x: 0, y: 0))
+        self.addChild(background)
     }
     
     

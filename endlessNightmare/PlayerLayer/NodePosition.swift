@@ -14,14 +14,14 @@ public struct NodePosition {
         var y: CGFloat = 0
         switch row{
             case 1:
-                x = -292
-                y = -91
+                x = -285
+                y = -84
             case 2:
-                x = -264
-                y = -127
+                x = -255
+                y = -114
             case 3:
-                x = -233
-                y = -165
+                x = -225
+                y = -144
             default:
                 break
         }
