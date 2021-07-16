@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     var character: SKNode! = nil
+    var masterNode = SKNode()
     
     override func didMove(to view: SKView) {
         let mapa = MapGenerator(imageName: "chao-2", zPosition: 1)
@@ -33,6 +34,9 @@ class GameScene: SKScene {
         
         let background = Background(position: CGPoint(x: 0, y: 0))
         self.addChild(background)
+        
+        addChild(masterNode)
+        
     }
     
     
@@ -70,8 +74,15 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
     }
+    var i = 0
     
     override func update(_ currentTime: TimeInterval) {
-    
+        
+        if i > 120{
+            EnemyGenerator.enemyBorn(masterNode: masterNode)
+            i = 0
+        }
+        MoveEnemy.Move(masterNode: masterNode)
+        i += 1
     }
 }
