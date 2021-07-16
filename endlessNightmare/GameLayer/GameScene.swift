@@ -35,7 +35,6 @@ class GameScene: SKScene {
         let background = Background(position: CGPoint(x: 0, y: 0))
         self.addChild(background)
         
-        masterNode.zPosition = 5
         addChild(masterNode)
         
     }

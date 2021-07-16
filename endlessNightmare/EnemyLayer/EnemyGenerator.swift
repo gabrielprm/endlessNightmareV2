@@ -22,16 +22,19 @@ public class EnemyGenerator{
             let diferenca = CGPoint(x: 580 - masterNode.position.x, y: 340 - masterNode.position.y)
             node.position = diferenca
             print("1 - \(node.position)")
+            node.zPosition = 10
             break
         case 2:
             let diferenca = CGPoint(x: 580 - masterNode.position.x, y: 390 - masterNode.position.y)
             node.position = diferenca
             print("2 - \(node.position)")
+            node.zPosition = 7
             break
         case 3:
             let diferenca = CGPoint(x: 580 - masterNode.position.x, y: 440 - masterNode.position.y)
             node.position = diferenca
             print("3 - \(node.position)")
+            node.zPosition = 5
             break
             
         default:
