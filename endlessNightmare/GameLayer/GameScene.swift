@@ -50,6 +50,7 @@ class GameScene: SKScene {
                 PlayerMechanics.moveUp(character)
             case .down:
                 PlayerMechanics.moveDown(character)
+                //SKAction.ani
             default:
                 break
             }
