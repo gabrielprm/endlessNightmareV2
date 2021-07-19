@@ -13,22 +13,20 @@ private struct CoefficientOfVelocityCalculator {
     var wrappedValue: Double {
         get { return coefficient }
         set {
-            coefficient += newValue
+            coefficient = log(newValue)
         }
     }
 }
 
 class DifficultyIncrement {
-    var axysX: Double
-    
-    init(axysX: CGFloat) {
-        self.axysX = Double(axysX)
-    }
+    var axysX: Double = 0
 
     @CoefficientOfVelocityCalculator private var difficultyCounter: Double
     
     func speedProgression() -> Double {
+        
         difficultyCounter = axysX
+        axysX += 1
         
         return difficultyCounter
     }
