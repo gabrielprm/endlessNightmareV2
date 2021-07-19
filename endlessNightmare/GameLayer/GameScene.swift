@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
     var masterNode = SKNode()
+    let difficultyMultiplier = DifficultyIncrement()
     
     override func didMove(to view: SKView) {
         buttonPause = childNode(withName: "button_pause") as? SKSpriteNode
@@ -101,7 +102,10 @@ class GameScene: SKScene {
     var scoreInt = 0
     
     override func update(_ currentTime: TimeInterval) {
-        MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
+        
+        difficultyMultiplier.speedProgression()
+        
+        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
         
         if i > 120 {
             EnemyManager.enemyBorn(masterNode: masterNode)

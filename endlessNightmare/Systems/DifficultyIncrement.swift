@@ -25,7 +25,7 @@ class DifficultyIncrement {
     
     func speedProgression(){
 
-            difficultyCounter = axysX
+        difficultyCounter = axysX
         axysX += 0.2
 
     }
