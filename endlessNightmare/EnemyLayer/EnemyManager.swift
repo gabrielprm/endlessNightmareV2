@@ -9,9 +9,10 @@ import SpriteKit
 
 public class EnemyManager {
     
+    
     static func enemyBorn(masterNode: SKNode) {
         let node = SKSpriteNode(imageNamed: "enemy")
-        node.setScale(0.3)
+        node.setScale(0.12)
         
         switch Int.random(in: 1...3) {
         case 1:
@@ -37,6 +38,10 @@ public class EnemyManager {
         }
         
         masterNode.addChild(node)
+    }
+    
+    static func enemyDie(node: SKSpriteNode){
+       
     }
     
     static func move(masterNode: SKNode){

@@ -17,8 +17,11 @@ class GameScene: SKScene {
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
     var masterNode = SKNode()
+    var masterNodeLastPosition:CGFloat!
     
     override func didMove(to view: SKView) {
+        
+        
         buttonPause = childNode(withName: "button_pause") as? SKSpriteNode
         score = childNode(withName: "score") as? SKLabelNode
         
@@ -43,6 +46,7 @@ class GameScene: SKScene {
         self.addChild(background)
         
         addChild(masterNode)
+        masterNodeLastPosition = masterNode.position.x
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -101,6 +105,12 @@ class GameScene: SKScene {
     var scoreInt = 0
     
     override func update(_ currentTime: TimeInterval) {
+        
+        if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
+            masterNodeLastPosition = masterNode.position.x + 1190
+            masterNode.removeChildren(in: [masterNode.children.first!])
+        }
+        
         MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
         
         if i > 120 {
