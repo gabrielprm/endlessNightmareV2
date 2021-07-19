@@ -8,7 +8,7 @@
 import SpriteKit
 
 @propertyWrapper
-private struct CoefficientOfVelocityCalculator {
+struct CoefficientOfVelocityCalculator {
     private var coefficient = 0.0
     var wrappedValue: Double {
         get { return coefficient }
@@ -19,15 +19,14 @@ private struct CoefficientOfVelocityCalculator {
 }
 
 class DifficultyIncrement {
-    var axysX: Double = 0
+    var axysX: Double = 1
 
-    @CoefficientOfVelocityCalculator private var difficultyCounter: Double
+    @CoefficientOfVelocityCalculator var difficultyCounter: Double
     
-    func speedProgression() -> Double {
-        
-        difficultyCounter = axysX
-        axysX += 1
-        
-        return difficultyCounter
+    func speedProgression(){
+
+            difficultyCounter = axysX
+        axysX += 0.2
+
     }
 }
