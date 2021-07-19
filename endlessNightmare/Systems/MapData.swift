@@ -8,6 +8,8 @@
 import Foundation
 import SpriteKit
 
+//Chao Dimensao : 1571 × 895
+
 public struct MapData {
     static let initialXPositionSecondMap: CGFloat = 1310
     static let initialYPositionSecondMap: CGFloat = 755

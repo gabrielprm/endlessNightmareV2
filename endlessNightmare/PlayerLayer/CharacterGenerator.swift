@@ -7,16 +7,17 @@
 import Foundation
 import SpriteKit
 
-public class characterGenerator: SKSpriteNode {
+public class CharacterGenerator: SKSpriteNode {
+    
     static var rowPosition = 2
     
-    init(){
-        let character = SKTexture(imageNamed: "Cow")
+    init() {
+        let character = SKTexture(imageNamed: "character")
         
         super.init(texture: character, color: .clear, size: character.size())
         
         self.position = NodePosition.nodePosition(row: 2)
-        self.setScale(0.3)
+        self.setScale(0.013)
         self.zPosition = 4
     }
     

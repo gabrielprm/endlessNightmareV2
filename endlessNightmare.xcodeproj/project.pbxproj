@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221CC39B26A2122400118D80 /* MoveEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CC39A26A2122400118D80 /* MoveEnemy.swift */; };
 		894BEC7526A097200032BE71 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7426A097200032BE71 /* PauseMenu.swift */; };
 		894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7626A097610032BE71 /* DifficultyIncrement.swift */; };
 		894BEC7926A097770032BE71 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7826A097770032BE71 /* MapGenerator.swift */; };
@@ -26,10 +25,10 @@
 		89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FC26A0C56B00AAEEDC /* MapManager.swift */; };
 		89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */; };
 		89F8130326A0F69300AAEEDC /* NodePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F8130226A0F69300AAEEDC /* NodePosition.swift */; };
+		B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A7D89326A240FF0022F268 /* EnemyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		221CC39A26A2122400118D80 /* MoveEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveEnemy.swift; sourceTree = "<group>"; };
 		894BEC7426A097200032BE71 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
 		894BEC7626A097610032BE71 /* DifficultyIncrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyIncrement.swift; sourceTree = "<group>"; };
 		894BEC7826A097770032BE71 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		89F812FC26A0C56B00AAEEDC /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenerator.swift; sourceTree = "<group>"; };
 		89F8130226A0F69300AAEEDC /* NodePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodePosition.swift; sourceTree = "<group>"; };
+		B2A7D89326A240FF0022F268 /* EnemyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				894BEC7A26A097870032BE71 /* EnemyGenerator.swift */,
-				221CC39A26A2122400118D80 /* MoveEnemy.swift */,
+				B2A7D89326A240FF0022F268 /* EnemyManager.swift */,
 			);
 			path = EnemyLayer;
 			sourceTree = "<group>";
@@ -247,6 +247,7 @@
 				894BEC8426A0C2880032BE71 /* MapData.swift in Sources */,
 				89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */,
 				89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */,
+				B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */,
 				894BEC7526A097200032BE71 /* PauseMenu.swift in Sources */,
 				894BEC8026A097D80032BE71 /* Score.swift in Sources */,
 				89F8130326A0F69300AAEEDC /* NodePosition.swift in Sources */,
@@ -255,7 +256,6 @@
 				89B524DB269CAF6600C3FD33 /* AppDelegate.swift in Sources */,
 				894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */,
 				894BEC8226A0990F0032BE71 /* Background.swift in Sources */,
-				221CC39B26A2122400118D80 /* MoveEnemy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
