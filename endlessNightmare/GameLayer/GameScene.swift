@@ -9,14 +9,14 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
-    var masterNode = SKNode()
+//    var masterNode = SKNode()
     
     override func didMove(to view: SKView) {
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
@@ -28,21 +28,29 @@ class GameScene: SKScene {
         mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
         addChild(mapa2)
         
+        CharacterManager.rowPosition = 2
+        
         character = CharacterGenerator()
         addChild(character)
         
+        let background = Background(position: CGPoint(x: 0, y: 0))
+        addChild(background)
+        
+        let enemyMasterNode = EnemyManager.enemyMasterNode
+        
+        enemyMasterNode.removeAllChildren()
+        
+        addChild(enemyMasterNode)
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeUp.direction = .up
-        self.view!.addGestureRecognizer(swipeUp)
+        view.addGestureRecognizer(swipeUp)
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
-        self.view!.addGestureRecognizer(swipeDown)
+        view.addGestureRecognizer(swipeDown)
         
-        let background = Background(position: CGPoint(x: 0, y: 0))
-        self.addChild(background)
-        
-        addChild(masterNode)
+        physicsWorld.contactDelegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,9 +84,9 @@ class GameScene: SKScene {
 
             switch swipeGesture.direction {
             case .up:
-                PlayerMechanics.moveUp(character)
+                CharacterManager.moveUp(character)
             case .down:
-                PlayerMechanics.moveDown(character)
+                CharacterManager.moveDown(character)
             default:
                 break
             }
@@ -101,11 +109,11 @@ class GameScene: SKScene {
         MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
         
         if i > 120 {
-            EnemyManager.enemyBorn(masterNode: masterNode)
+            EnemyManager.enemyBorn()
             i = 0
         }
         
-        EnemyManager.move(masterNode: masterNode)
+        EnemyManager.move()
         
         if scoreInt % 60 == 0 {
             score.text = "\(scoreInt / 60)"

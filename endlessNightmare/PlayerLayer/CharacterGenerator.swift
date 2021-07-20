@@ -4,21 +4,28 @@
 //
 //  Created by Gabriel do Prado Moreira on 15/07/21.
 //
-import Foundation
+
 import SpriteKit
 
-public class CharacterGenerator: SKSpriteNode {
-    
-    static var rowPosition = 2
+class CharacterGenerator: SKSpriteNode {
     
     init() {
-        let character = SKTexture(imageNamed: "character")
+        let texture = SKTexture(imageNamed: "character")
         
-        super.init(texture: character, color: .clear, size: character.size())
+        super.init(texture: texture, color: .clear, size: texture.size())
         
-        self.position = NodePosition.nodePosition(row: 2)
+        self.position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
         self.setScale(0.013)
         self.zPosition = 4
+        
+        let physics = SKPhysicsBody(rectangleOf: size)
+        
+        physics.isDynamic = false
+        physics.categoryBitMask = 1
+        physics.contactTestBitMask = 2
+        physics.collisionBitMask = 0 // Ignorar colisão
+        
+        self.physicsBody = physics
     }
     
     required init?(coder aDecoder: NSCoder) {
