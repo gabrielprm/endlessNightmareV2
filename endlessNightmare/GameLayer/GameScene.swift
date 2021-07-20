@@ -23,6 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
     let difficultyMultiplier = DifficultyIncrement()
     
+    var i = 0.0
+    var scoreInt = ScoreCalculator()
+    
     override func didMove(to view: SKView) {
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
 
@@ -112,31 +115,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view!.presentScene(gameOverScene, transition: transition)
     }
     
-    var i = 0
-    var scoreInt = ScoreCalculator()
-    
     override func update(_ currentTime: TimeInterval) {
         
+        //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
+        difficultyMultiplier.speedProgression()
+        
+        //Calculo progressivo da pontuacao
+        scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
+        
+        //?
         if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
             masterNodeLastPosition = masterNode.position.x + 1190
             masterNode.removeChildren(in: [masterNode.children.first!])
         }
-
-        difficultyMultiplier.speedProgression()
         
-        scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
-        
-        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
-      
+        // Cria um inimigo a cada x periodos
         if i > 120 {
             EnemyManager.enemyBorn()
             i = 0
         }
+        //Auxiliar responsavel pelo periode de spawn de inimigos
+        i += 0.2 * difficultyMultiplier.difficultyCounter
         
-        EnemyManager.move()
-
+        //E responsavel pela movimentacao do mapa
+        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
+        
+        //E responsavel pela movimentacao dos inimigos
+        EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
+        
+        //Mostra a pontuacao na tela
+        //E dividido por 60, pois e a taxa de atualizacao do update
         score.text = "\(scoreInt.scoreCounter / 60)"
         
-        i += 1
     }
 }

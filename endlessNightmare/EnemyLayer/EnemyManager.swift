@@ -35,7 +35,7 @@ struct EnemyManager {
             node.zPosition = 5
             break
         default:
-            print("Deu ruim")
+            break
         }
         
         enemyMasterNode.addChild(node)
@@ -49,8 +49,8 @@ struct EnemyManager {
     //static func move(masterNode: SKNode){
     //   masterNode.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 1))
 
-    static func move() {
-        enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 1))
+    static func move(count:CGFloat ) {
+        enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient * count, y: MapData.movYCoefficient * count, duration: 1))
 
     }
     
