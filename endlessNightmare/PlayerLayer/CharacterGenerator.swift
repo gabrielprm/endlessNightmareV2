@@ -10,13 +10,15 @@ import SpriteKit
 class CharacterGenerator: SKSpriteNode {
     
     init() {
-        let texture = SKTexture(imageNamed: "character")
+        let textureCharacter1 = SKTexture(imageNamed: "character1")
+        let textureCharacter2 = SKTexture(imageNamed: "character2")
+        let textures = [textureCharacter1, textureCharacter2]
         
-        super.init(texture: texture, color: .clear, size: texture.size())
+        super.init(texture: textureCharacter1, color: .clear, size: textureCharacter1.size())
         
-        self.position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
-        self.setScale(0.013)
-        self.zPosition = 4
+        position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
+        setScale(0.013)
+        zPosition = 4
         
         let physics = SKPhysicsBody(rectangleOf: size)
         
@@ -25,7 +27,12 @@ class CharacterGenerator: SKSpriteNode {
         physics.contactTestBitMask = 2
         physics.collisionBitMask = 0 // Ignorar colisão
         
-        self.physicsBody = physics
+        physicsBody = physics
+        
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.25)
+        let runAnimation = SKAction.repeatForever(animation)
+        
+        run(runAnimation)
     }
     
     required init?(coder aDecoder: NSCoder) {
