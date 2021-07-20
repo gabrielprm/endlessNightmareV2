@@ -19,7 +19,7 @@ class GameScene: SKScene {
     var masterNode = SKNode()
     
     override func didMove(to view: SKView) {
-        buttonPause = childNode(withName: "button_pause") as? SKSpriteNode
+        buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
         score = childNode(withName: "score") as? SKLabelNode
         
         mapa = MapGenerator(imageName: "chao", zPosition: 1)
@@ -52,9 +52,9 @@ class GameScene: SKScene {
         guard let node = nodes(at: touchLocation).first else { return }
         guard let nodeName = node.name else { return }
         
-        if nodeName == "button_pause" {
+        if nodeName == "buttonPause" {
             let buttonPlay = SKSpriteNode(imageNamed: "button_play")
-            buttonPlay.name = "button_play"
+            buttonPlay.name = "buttonPlay"
             buttonPlay.zPosition = 999
             buttonPlay.setScale(4)
             
@@ -62,7 +62,7 @@ class GameScene: SKScene {
             
             node.isUserInteractionEnabled = true
             isPaused = true
-        } else if nodeName == "button_play" {
+        } else if nodeName == "buttonPlay" {
             node.removeFromParent()
             
             buttonPause.isUserInteractionEnabled = false
