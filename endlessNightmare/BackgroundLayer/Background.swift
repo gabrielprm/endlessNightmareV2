@@ -10,17 +10,20 @@ import SpriteKit
 
 class Background: SKSpriteNode {
     
-    init(position: CGPoint){
+    init(position: CGPoint) {
         let background = SKTexture(imageNamed: "Background")
         
         super.init(texture: background, color: .clear, size: background.size())
+    
         self.setScale(1.5)
         self.position = position
         self.zPosition = -1
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        
+        self.zPosition = -1
     }
     
 }

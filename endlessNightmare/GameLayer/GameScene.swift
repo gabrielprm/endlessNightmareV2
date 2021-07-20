@@ -85,16 +85,13 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func didBegin(_ contact: SKPhysicsContact) {
+        let transition = SKTransition.fade(withDuration: 1.5)
+        let gameOverScene = SKScene(fileNamed: "GameOverScene")!
         
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-  
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        gameOverScene.scaleMode = .aspectFill
+        
+        view!.presentScene(gameOverScene, transition: transition)
     }
     
     var i = 0
