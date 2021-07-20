@@ -113,36 +113,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     var i = 0
-    var scoreInt = 0
+    var scoreInt = ScoreCalculator()
     
     override func update(_ currentTime: TimeInterval) {
         
-
         if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
             masterNodeLastPosition = masterNode.position.x + 1190
             masterNode.removeChildren(in: [masterNode.children.first!])
         }
-        
-        MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
 
-      
         difficultyMultiplier.speedProgression()
+        
+        scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
         
         MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
       
-        
         if i > 120 {
             EnemyManager.enemyBorn()
             i = 0
         }
         
         EnemyManager.move()
-        
-        if scoreInt % 60 == 0 {
-            score.text = "\(scoreInt / 60)"
-        }
+
+        score.text = "\(scoreInt.scoreCounter / 60)"
         
         i += 1
-        scoreInt += 1
     }
 }

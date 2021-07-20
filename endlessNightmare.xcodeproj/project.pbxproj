@@ -107,7 +107,6 @@
 		894BEC6F26A095F90032BE71 /* HUDLayer */ = {
 			isa = PBXGroup;
 			children = (
-				894BEC7F26A097D80032BE71 /* Score.swift */,
 				B2B4176D26A5F05C004CE918 /* HomeScene.swift */,
 				B2B4176F26A5F06A004CE918 /* HomeScene.sks */,
 				B2B4177126A61EC8004CE918 /* GameOverScene.swift */,
@@ -119,6 +118,7 @@
 		894BEC7026A0960B0032BE71 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
+				894BEC7F26A097D80032BE71 /* Score.swift */,
 				89B524DA269CAF6600C3FD33 /* AppDelegate.swift */,
 				894BEC7626A097610032BE71 /* DifficultyIncrement.swift */,
 				89B524E2269CAF6600C3FD33 /* GameViewController.swift */,
