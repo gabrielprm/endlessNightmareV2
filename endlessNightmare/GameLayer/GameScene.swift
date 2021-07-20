@@ -18,10 +18,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score: SKLabelNode! = nil
 
     var masterNode = SKNode()
+
+    var masterNodeLastPosition:CGFloat!
+  
     let difficultyMultiplier = DifficultyIncrement()
     
     override func didMove(to view: SKView) {
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
+
         score = childNode(withName: "score") as? SKLabelNode
         
         mapa = MapGenerator(imageName: "chao", zPosition: 1)
@@ -52,6 +56,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         swipeDown.direction = .down
         view.addGestureRecognizer(swipeDown)
         
+
+        addChild(masterNode)
+        masterNodeLastPosition = masterNode.position.x
+
         physicsWorld.contactDelegate = self
     }
     
@@ -109,9 +117,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
+
+        if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
+            masterNodeLastPosition = masterNode.position.x + 1190
+            masterNode.removeChildren(in: [masterNode.children.first!])
+        }
+        
+        MapManager.updateMap(firstMap: mapa, secondMap: mapa2)
+
+      
         difficultyMultiplier.speedProgression()
         
         MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
+      
         
         if i > 120 {
             EnemyManager.enemyBorn()

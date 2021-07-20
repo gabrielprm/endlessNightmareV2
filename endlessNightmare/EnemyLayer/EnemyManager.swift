@@ -9,6 +9,7 @@ import SpriteKit
 
 struct EnemyManager {
     
+
     static let enemyMasterNode = SKNode()
     
     static func enemyBorn() {
@@ -40,8 +41,17 @@ struct EnemyManager {
         enemyMasterNode.addChild(node)
     }
     
+
+    static func enemyDie(node: SKSpriteNode){
+       
+    }
+    
+    //static func move(masterNode: SKNode){
+    //   masterNode.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 1))
+
     static func move() {
         enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 1))
+
     }
     
 }
