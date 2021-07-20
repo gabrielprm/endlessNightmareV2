@@ -11,7 +11,6 @@
 		894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7626A097610032BE71 /* DifficultyIncrement.swift */; };
 		894BEC7926A097770032BE71 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7826A097770032BE71 /* MapGenerator.swift */; };
 		894BEC7B26A097870032BE71 /* EnemyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7A26A097870032BE71 /* EnemyGenerator.swift */; };
-		894BEC7E26A097AD0032BE71 /* PlayerMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7D26A097AD0032BE71 /* PlayerMechanics.swift */; };
 		894BEC8026A097D80032BE71 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC7F26A097D80032BE71 /* Score.swift */; };
 		894BEC8226A0990F0032BE71 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC8126A0990F0032BE71 /* Background.swift */; };
 		894BEC8426A0C2880032BE71 /* MapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894BEC8326A0C2880032BE71 /* MapData.swift */; };
@@ -24,8 +23,12 @@
 		89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B524E7269CAF6700C3FD33 /* Assets.xcassets */; };
 		89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FC26A0C56B00AAEEDC /* MapManager.swift */; };
 		89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */; };
-		89F8130326A0F69300AAEEDC /* NodePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F8130226A0F69300AAEEDC /* NodePosition.swift */; };
+		B27DDF9826A6813600AA451D /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DDF9726A6813600AA451D /* CharacterManager.swift */; };
 		B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A7D89326A240FF0022F268 /* EnemyManager.swift */; };
+		B2B4176E26A5F05C004CE918 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4176D26A5F05C004CE918 /* HomeScene.swift */; };
+		B2B4177026A5F06A004CE918 /* HomeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2B4176F26A5F06A004CE918 /* HomeScene.sks */; };
+		B2B4177226A61EC8004CE918 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4177126A61EC8004CE918 /* GameOverScene.swift */; };
+		B2B4177426A61ED8004CE918 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2B4177326A61ED8004CE918 /* GameOverScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +36,6 @@
 		894BEC7626A097610032BE71 /* DifficultyIncrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyIncrement.swift; sourceTree = "<group>"; };
 		894BEC7826A097770032BE71 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		894BEC7A26A097870032BE71 /* EnemyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyGenerator.swift; sourceTree = "<group>"; };
-		894BEC7D26A097AD0032BE71 /* PlayerMechanics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMechanics.swift; sourceTree = "<group>"; };
 		894BEC7F26A097D80032BE71 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		894BEC8126A0990F0032BE71 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		894BEC8326A0C2880032BE71 /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
@@ -48,8 +50,12 @@
 		89B524E9269CAF6700C3FD33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89F812FC26A0C56B00AAEEDC /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenerator.swift; sourceTree = "<group>"; };
-		89F8130226A0F69300AAEEDC /* NodePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodePosition.swift; sourceTree = "<group>"; };
+		B27DDF9726A6813600AA451D /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
 		B2A7D89326A240FF0022F268 /* EnemyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyManager.swift; sourceTree = "<group>"; };
+		B2B4176D26A5F05C004CE918 /* HomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		B2B4176F26A5F06A004CE918 /* HomeScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeScene.sks; sourceTree = "<group>"; };
+		B2B4177126A61EC8004CE918 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		B2B4177326A61ED8004CE918 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,10 @@
 			isa = PBXGroup;
 			children = (
 				894BEC7F26A097D80032BE71 /* Score.swift */,
+				B2B4176D26A5F05C004CE918 /* HomeScene.swift */,
+				B2B4176F26A5F06A004CE918 /* HomeScene.sks */,
+				B2B4177126A61EC8004CE918 /* GameOverScene.swift */,
+				B2B4177326A61ED8004CE918 /* GameOverScene.sks */,
 			);
 			path = HUDLayer;
 			sourceTree = "<group>";
@@ -129,9 +139,8 @@
 		894BEC7C26A0979A0032BE71 /* PlayerLayer */ = {
 			isa = PBXGroup;
 			children = (
-				894BEC7D26A097AD0032BE71 /* PlayerMechanics.swift */,
 				89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */,
-				89F8130226A0F69300AAEEDC /* NodePosition.swift */,
+				B27DDF9726A6813600AA451D /* CharacterManager.swift */,
 			);
 			path = PlayerLayer;
 			sourceTree = "<group>";
@@ -228,8 +237,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				89B524E6269CAF6700C3FD33 /* Main.storyboard in Resources */,
+				B2B4177026A5F06A004CE918 /* HomeScene.sks in Resources */,
 				89B524DD269CAF6600C3FD33 /* GameScene.sks in Resources */,
 				89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */,
+				B2B4177426A61ED8004CE918 /* GameOverScene.sks in Resources */,
 				89B524DF269CAF6600C3FD33 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,18 +253,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				89B524E1269CAF6600C3FD33 /* GameScene.swift in Sources */,
+				B2B4176E26A5F05C004CE918 /* HomeScene.swift in Sources */,
 				894BEC7926A097770032BE71 /* MapGenerator.swift in Sources */,
 				89B524E3269CAF6600C3FD33 /* GameViewController.swift in Sources */,
 				894BEC8426A0C2880032BE71 /* MapData.swift in Sources */,
+				B2B4177226A61EC8004CE918 /* GameOverScene.swift in Sources */,
 				89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */,
 				89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */,
 				B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */,
 				894BEC7526A097200032BE71 /* PauseMenu.swift in Sources */,
 				894BEC8026A097D80032BE71 /* Score.swift in Sources */,
-				89F8130326A0F69300AAEEDC /* NodePosition.swift in Sources */,
 				894BEC7B26A097870032BE71 /* EnemyGenerator.swift in Sources */,
-				894BEC7E26A097AD0032BE71 /* PlayerMechanics.swift in Sources */,
 				89B524DB269CAF6600C3FD33 /* AppDelegate.swift in Sources */,
+				B27DDF9826A6813600AA451D /* CharacterManager.swift in Sources */,
 				894BEC7726A097610032BE71 /* DifficultyIncrement.swift in Sources */,
 				894BEC8226A0990F0032BE71 /* Background.swift in Sources */,
 			);

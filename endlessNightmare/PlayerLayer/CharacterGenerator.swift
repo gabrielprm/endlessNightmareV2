@@ -4,21 +4,35 @@
 //
 //  Created by Gabriel do Prado Moreira on 15/07/21.
 //
-import Foundation
+
 import SpriteKit
 
-public class CharacterGenerator: SKSpriteNode {
-    
-    static var rowPosition = 2
+class CharacterGenerator: SKSpriteNode {
     
     init() {
-        let character = SKTexture(imageNamed: "character")
+        let textureCharacter1 = SKTexture(imageNamed: "character1")
+        let textureCharacter2 = SKTexture(imageNamed: "character2")
+        let textures = [textureCharacter1, textureCharacter2]
         
-        super.init(texture: character, color: .clear, size: character.size())
+        super.init(texture: textureCharacter1, color: .clear, size: textureCharacter1.size())
         
-        self.position = NodePosition.nodePosition(row: 2)
-        self.setScale(0.013)
-        self.zPosition = 4
+        position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
+        setScale(0.013)
+        zPosition = 4
+        
+        let physics = SKPhysicsBody(rectangleOf: size)
+        
+        physics.isDynamic = false
+        physics.categoryBitMask = 1
+        physics.contactTestBitMask = 2
+        physics.collisionBitMask = 0 // Ignorar colisão
+        
+        physicsBody = physics
+        
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.25)
+        let runAnimation = SKAction.repeatForever(animation)
+        
+        run(runAnimation)
     }
     
     required init?(coder aDecoder: NSCoder) {
