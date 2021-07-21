@@ -16,7 +16,7 @@ class EnemyGenerator: SKSpriteNode {
         
         setScale(0.12)
         
-        let physics = SKPhysicsBody(rectangleOf: size)
+        let physics = SKPhysicsBody(circleOfRadius: 10)
         
         physics.affectedByGravity = false
         physics.categoryBitMask = 2
