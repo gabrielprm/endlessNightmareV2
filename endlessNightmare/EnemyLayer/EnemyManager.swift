@@ -41,6 +41,16 @@ struct EnemyManager {
         enemyMasterNode.addChild(node)
     }
     
+//    static func enemyBornAction() -> SKAction{
+//
+//        let criaInimigos = SKAction.customAction(withDuration: 0.0, actionBlock: {
+//            node, elapsedTime in
+//
+//            EnemyManager.enemyBorn()
+//        })
+//        return criaInimigos
+//    }
+    
 
     static func enemyDie(node: SKSpriteNode){
        

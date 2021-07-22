@@ -17,7 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
 
-    var masterNode = SKNode()
 
     var masterNodeLastPosition:CGFloat!
   
@@ -61,10 +60,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         swipeDown.direction = .down
         view.addGestureRecognizer(swipeDown)
         
-
-        addChild(masterNode)
-        masterNodeLastPosition = masterNode.position.x
-
 //        physicsWorld.contactDelegate = self
         
         
@@ -74,14 +69,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
        })
         
-        let actions = Actions(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
+            node, elapsedTime in
+            
+            //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
+            self.difficultyMultiplier.speedProgression()
+            
+            //Calculo progressivo da pontuacao
+            self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
+            
+            if let node = node as? SKLabelNode{
+                
+                //Mostra a pontuacao na tela
+                //E dividido por 60, pois e a taxa de atualizacao do update
+                //score.text = "\(scoreInt.scoreCounter / 60)"
+                node.text = "\(self.scoreInt.scoreCounter / 30)"
+            }
+            
+        })
         
+//        let  enemyBornAction = EnemyManager.enemyBornAction()
         
         self.run(SKAction.repeatForever(movMap))
-        self.run(SKAction.repeatForever(SKAction.sequence([actions.array.first!, SKAction.wait(forDuration: 1)])))
-//
+        
+//        self.run(SKAction.repeatForever(SKAction.sequence([enemyBornAction, SKAction.wait(forDuration: i)])))
         
         
+        score.run(SKAction.repeatForever(attPontos))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -136,22 +150,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
-        difficultyMultiplier.speedProgression()
         
-        //Calculo progressivo da pontuacao
-        scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
+    if i > 120{
+        EnemyManager.enemyBorn()
+        i = 0
+    }
+    i += difficultyMultiplier.difficultyCounter
+        
         
         //E responsavel pela movimentacao do mapa
 //        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
         
         //E responsavel pela movimentacao dos inimigos
         EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
-        
-        //Mostra a pontuacao na tela
-        //E dividido por 60, pois e a taxa de atualizacao do update
-        score.text = "\(scoreInt.scoreCounter / 60)"
-        
-  
+        //print(EnemyManager.enemyMasterNode.position.x)
     }
 }
