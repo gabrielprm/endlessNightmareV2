@@ -23,8 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
     let difficultyMultiplier = DifficultyIncrement()
     
-    var i = 0.0
+    var i = 1.0
     var scoreInt = ScoreCalculator()
+    
+    
     
     override func didMove(to view: SKView) {
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
@@ -63,7 +65,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(masterNode)
         masterNodeLastPosition = masterNode.position.x
 
-        physicsWorld.contactDelegate = self
+//        physicsWorld.contactDelegate = self
+        
+        
+        let movMap = SKAction.customAction(withDuration: 1, actionBlock: {
+           node, elapsedTime in
+
+            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+       })
+        
+        let actions = Actions(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+        
+        
+        self.run(SKAction.repeatForever(movMap))
+        self.run(SKAction.repeatForever(SKAction.sequence([actions.array.first!, SKAction.wait(forDuration: 1)])))
+//
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -115,6 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view!.presentScene(gameOverScene, transition: transition)
     }
     
+    
     override func update(_ currentTime: TimeInterval) {
         
         //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
@@ -123,22 +142,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Calculo progressivo da pontuacao
         scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
         
-        //?
-        if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
-            masterNodeLastPosition = masterNode.position.x + 1190
-            masterNode.removeChildren(in: [masterNode.children.first!])
-        }
-        
-        // Cria um inimigo a cada x periodos
-        if i > 120 {
-            EnemyManager.enemyBorn()
-            i = 0
-        }
-        //Auxiliar responsavel pelo periode de spawn de inimigos
-        i += 0.2 * difficultyMultiplier.difficultyCounter
-        
         //E responsavel pela movimentacao do mapa
-        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
+//        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
         
         //E responsavel pela movimentacao dos inimigos
         EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
@@ -147,5 +152,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //E dividido por 60, pois e a taxa de atualizacao do update
         score.text = "\(scoreInt.scoreCounter / 60)"
         
+  
     }
 }
