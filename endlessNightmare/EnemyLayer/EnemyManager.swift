@@ -47,8 +47,13 @@ struct EnemyManager {
         enemyMasterNode.addChild(node)
     }
     
-    static func enemyDie(node: SKSpriteNode) {
+    static func enemyDie() {
        
+        let ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
+        let posAtualXMAsterNode = enemyMasterNode.position.x
+        if posAtualXMAsterNode - ultimaPosXMasterNode  <= -980{
+            enemyMasterNode.removeChildren(in: [enemyMasterNode.children.first!])
+        }
     }
 
     static func move(count:CGFloat ) {

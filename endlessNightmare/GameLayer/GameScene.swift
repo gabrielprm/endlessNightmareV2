@@ -156,19 +156,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        
+    // spawn de inimigos
     if i > 120{
         EnemyManager.enemyBorn()
+        EnemyManager.enemyDie()
         i = 0
     }
     i += difficultyMultiplier.difficultyCounter
-        
     
-        //E responsavel pela movimentacao do mapa
-//        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
         
-        //E responsavel pela movimentacao dos inimigos
-        EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
-        //print(EnemyManager.enemyMasterNode.position.x)
+    //E responsavel pela movimentacao dos inimigos
+    EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
     }
 }
