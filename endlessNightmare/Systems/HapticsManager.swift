@@ -8,20 +8,18 @@
 import Foundation
 import UIKit
 
-final class HaptictsManager{
-    static var shared = HaptictsManager()
+class HaptictsManager{
     
-    private init(){}
+    public init(){}
     
-    public func selectionVibrate(){
+    public func oneVibrationHaptic(){
         DispatchQueue.main.async {
             let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
             selectionFeedbackGenerator.prepare()
-            selectionFeedbackGenerator.selectionChanged()
-        }
+            selectionFeedbackGenerator.selectionChanged()        }
     }
     
-    public func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
+    public func twoVibrationHaptic(for type: UINotificationFeedbackGenerator.FeedbackType) {
         DispatchQueue.main.async {
             let notificationGenerator = UINotificationFeedbackGenerator()
             notificationGenerator.prepare()

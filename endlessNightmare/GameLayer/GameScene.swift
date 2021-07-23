@@ -12,20 +12,17 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKSpriteNode!
-    
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
-
     var masterNode = SKNode()
-  
     let difficultyMultiplier = DifficultyIncrement()
-    
     var i = 1.0
     var scoreInt = ScoreCalculator()
     var gameSound = SKAudioNode()
+    let haptich = HaptictsManager()
     
     
     override func didMove(to view: SKView) {
@@ -68,17 +65,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
             node, elapsedTime in
             
-            //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
             self.difficultyMultiplier.speedProgression()
             
-            //Calculo progressivo da pontuacao
             self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                
-                //Mostra a pontuacao na tela
-                //E dividido por 60, pois e a taxa de atualizacao do update
-                //score.text = "\(scoreInt.scoreCounter / 60)"
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
             
@@ -121,11 +112,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             switch swipeGesture.direction {
             case .up:
-                GameViewController.sucessFullyBookedFlight()
+                
+                haptich.oneVibrationHaptic()
                 CharacterManager.moveUp(character)
             case .down:
-            
-                GameViewController.sucessFullyBookedFlight()
+                
+                haptich.oneVibrationHaptic()
                 CharacterManager.moveDown(character)
             default:
                 break
@@ -151,7 +143,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
-
+        
+        haptich.twoVibrationHaptic(for: .success)
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
@@ -164,8 +157,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         EnemyManager.enemyBorn()
         i = 0
     }
-    i += difficultyMultiplier.difficultyCounter
+        i += difficultyMultiplier.difficultyCounter * 0.8
     EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
+    print(difficultyMultiplier.difficultyCounter)
+
         
     //E responsavel pela movimentacao dos inimigos
     EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
