@@ -8,6 +8,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import CoreHaptics
 
 class GameViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
             }
             
+            
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
@@ -31,7 +33,11 @@ class GameViewController: UIViewController {
             view.showsPhysics = true
         }
     }
-
+    
+    @objc static func sucessFullyBookedFlight(){
+        HaptictsManager.shared.vibrate(for: .success)
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
