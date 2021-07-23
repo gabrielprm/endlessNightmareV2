@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var i = 1.0
     var scoreInt = ScoreCalculator()
     var gameSound = SKAudioNode()
+    let haptich = HaptictsManager()
     
     
     override func didMove(to view: SKView) {
@@ -128,11 +129,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             switch swipeGesture.direction {
             case .up:
-                GameViewController.sucessFullyBookedFlight()
+                
+                haptich.oneVibrationHaptic()
                 CharacterManager.moveUp(character)
             case .down:
-            
-                GameViewController.sucessFullyBookedFlight()
+                
+                haptich.oneVibrationHaptic()
                 CharacterManager.moveDown(character)
             default:
                 break
@@ -158,7 +160,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
-
+        
+        haptich.twoVibrationHaptic(for: .success)
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
