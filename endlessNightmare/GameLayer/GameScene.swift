@@ -51,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyMasterNode.removeAllChildren()
 
         enemyMasterNode.removeFromParent()
+        
         addChild(enemyMasterNode)
         
         physicsWorld.contactDelegate = self
