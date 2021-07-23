@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character = CharacterGenerator()
         addChild(character)
         
-        let enemyMasterNode = EnemyManager.enemyMasterNode
+        let enemyMasterNode = PreSetsEnemy.enemyMasterNode
 //
         enemyMasterNode.removeAllChildren()
 //
@@ -159,13 +159,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // spawn de inimigos
     if i > 120{
         EnemyManager.enemyBorn()
-        EnemyManager.enemyDie()
+        EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
         i = 0
     }
-    i += difficultyMultiplier.difficultyCounter
+        i += difficultyMultiplier.difficultyCounter * 0.4
     
         
     //E responsavel pela movimentacao dos inimigos
-    EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
+    EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
     }
 }
