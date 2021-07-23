@@ -47,9 +47,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(background)
         
         let enemyMasterNode = EnemyManager.enemyMasterNode
-        
+//
         enemyMasterNode.removeAllChildren()
-        
+//
+        enemyMasterNode.removeFromParent()
         addChild(enemyMasterNode)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
@@ -86,10 +87,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
             
+            
         })
         
 //        let  enemyBornAction = EnemyManager.enemyBornAction()
-        
+
         self.run(SKAction.repeatForever(movMap))
         
 //        self.run(SKAction.repeatForever(SKAction.sequence([enemyBornAction, SKAction.wait(forDuration: i)])))
@@ -157,7 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     i += difficultyMultiplier.difficultyCounter
         
-        
+    
         //E responsavel pela movimentacao do mapa
 //        MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count:CGFloat(difficultyMultiplier.difficultyCounter))
         
