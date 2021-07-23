@@ -22,6 +22,9 @@
 		89B524E3269CAF6600C3FD33 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B524E2269CAF6600C3FD33 /* GameViewController.swift */; };
 		89B524E6269CAF6700C3FD33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B524E4269CAF6700C3FD33 /* Main.storyboard */; };
 		89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B524E7269CAF6700C3FD33 /* Assets.xcassets */; };
+		89B8D71226AB597400B57008 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B8D71126AB597400B57008 /* HapticsManager.swift */; };
+		89B8D71626AB59E400B57008 /* gameSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89B8D71426AB59E400B57008 /* gameSound.mp3 */; };
+		89B8D71726AB59E400B57008 /* impactSoft.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 89B8D71526AB59E400B57008 /* impactSoft.ogg */; };
 		89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FC26A0C56B00AAEEDC /* MapManager.swift */; };
 		89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */; };
 		B27DDF9826A6813600AA451D /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DDF9726A6813600AA451D /* CharacterManager.swift */; };
@@ -50,6 +53,9 @@
 		89B524E5269CAF6700C3FD33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89B524E7269CAF6700C3FD33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89B524E9269CAF6700C3FD33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B8D71126AB597400B57008 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		89B8D71426AB59E400B57008 /* gameSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameSound.mp3; sourceTree = "<group>"; };
+		89B8D71526AB59E400B57008 /* impactSoft.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = impactSoft.ogg; sourceTree = "<group>"; };
 		89F812FC26A0C56B00AAEEDC /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenerator.swift; sourceTree = "<group>"; };
 		B27DDF9726A6813600AA451D /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 		894BEC7026A0960B0032BE71 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
+				89B8D71126AB597400B57008 /* HapticsManager.swift */,
 				894BEC7F26A097D80032BE71 /* Score.swift */,
 				89B524DA269CAF6600C3FD33 /* AppDelegate.swift */,
 				894BEC7626A097610032BE71 /* DifficultyIncrement.swift */,
@@ -167,6 +174,7 @@
 		89B524D9269CAF6600C3FD33 /* endlessNightmare */ = {
 			isa = PBXGroup;
 			children = (
+				89B8D71326AB59E400B57008 /* Resources */,
 				221CC39C26A2158E00118D80 /* EnemyLayer */,
 				894BEC7C26A0979A0032BE71 /* PlayerLayer */,
 				894BEC7126A096260032BE71 /* UIElements */,
@@ -180,6 +188,15 @@
 				89B524E9269CAF6700C3FD33 /* Info.plist */,
 			);
 			path = endlessNightmare;
+			sourceTree = "<group>";
+		};
+		89B8D71326AB59E400B57008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				89B8D71426AB59E400B57008 /* gameSound.mp3 */,
+				89B8D71526AB59E400B57008 /* impactSoft.ogg */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +258,8 @@
 			files = (
 				89B524E6269CAF6700C3FD33 /* Main.storyboard in Resources */,
 				B2B4177026A5F06A004CE918 /* HomeScene.sks in Resources */,
+				89B8D71626AB59E400B57008 /* gameSound.mp3 in Resources */,
+				89B8D71726AB59E400B57008 /* impactSoft.ogg in Resources */,
 				89B524DD269CAF6600C3FD33 /* GameScene.sks in Resources */,
 				89B524E8269CAF6700C3FD33 /* Assets.xcassets in Resources */,
 				B2B4177426A61ED8004CE918 /* GameOverScene.sks in Resources */,
@@ -263,6 +282,7 @@
 				B2B4177226A61EC8004CE918 /* GameOverScene.swift in Sources */,
 				89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */,
 				89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */,
+				89B8D71226AB597400B57008 /* HapticsManager.swift in Sources */,
 				B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */,
 				894BEC7526A097200032BE71 /* PauseMenu.swift in Sources */,
 				223A064526AB4877007C455E /* PreSetsEnemy.swift in Sources */,
@@ -411,7 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53RZF4C2P7;
+				DEVELOPMENT_TEAM = FZWZGGS7F2;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -430,7 +450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53RZF4C2P7;
+				DEVELOPMENT_TEAM = FZWZGGS7F2;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

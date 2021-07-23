@@ -53,8 +53,8 @@ class CharacterManager {
         var y: CGFloat = 0
         switch row {
             case 1:
-                x = -285
-                y = -84
+                x = -277
+                y = -76
             case 2:
                 x = -255
                 y = -114
