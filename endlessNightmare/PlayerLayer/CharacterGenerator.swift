@@ -20,7 +20,7 @@ class CharacterGenerator: SKSpriteNode {
         setScale(0.013)
         zPosition = 4
         
-        let physics = SKPhysicsBody(rectangleOf: size)
+        let physics = SKPhysicsBody(circleOfRadius: 10)
         
         physics.isDynamic = false
         physics.categoryBitMask = 2

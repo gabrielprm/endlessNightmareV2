@@ -25,10 +25,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var i = 1.0
     var scoreInt = ScoreCalculator()
-    
+    var gameSound = SKAudioNode()
     
     
     override func didMove(to view: SKView) {
+        gameSound = SKAudioNode(fileNamed: "gameSound")
+        addChild(gameSound)
+        
         background = childNode(withName: "background") as? SKSpriteNode
         
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
@@ -47,13 +50,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(character)
         
         let enemyMasterNode = EnemyManager.enemyMasterNode
-//
+
         enemyMasterNode.removeAllChildren()
-//
+
         enemyMasterNode.removeFromParent()
         addChild(enemyMasterNode)
         
-//        physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
         
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: {
@@ -108,12 +111,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             buttonPlay.setScale(4)
             
             addChild(buttonPlay)
-            
+            gameSound.run(SKAction.pause())
             node.isUserInteractionEnabled = true
             isPaused = true
         } else if nodeName == "buttonPlay" {
             node.removeFromParent()
-            
+            gameSound.run(SKAction.play())
             buttonPause.isUserInteractionEnabled = false
             isPaused = false
         }
@@ -145,14 +148,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        let impactSound = SKAudioNode(fileNamed: "impactSoft.ogg")
+        addChild(impactSound)
+        
+        gameSound.run(SKAction.stop())
+        
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
-        
+
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         
