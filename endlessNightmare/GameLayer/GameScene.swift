@@ -125,8 +125,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             switch swipeGesture.direction {
             case .up:
+                GameViewController.sucessFullyBookedFlight()
                 CharacterManager.moveUp(character)
             case .down:
+            
+                GameViewController.sucessFullyBookedFlight()
                 CharacterManager.moveDown(character)
             default:
                 break
