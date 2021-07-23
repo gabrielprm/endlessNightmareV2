@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var background: SKSpriteNode!
+    
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
@@ -27,8 +29,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreInt = ScoreCalculator()
     
     override func didMove(to view: SKView) {
+        background = childNode(withName: "background") as? SKSpriteNode
+        
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
-
+        
         score = childNode(withName: "score") as? SKLabelNode
         
         mapa = MapGenerator(imageName: "chao", zPosition: 1)
@@ -41,9 +45,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         character = CharacterGenerator()
         addChild(character)
-        
-        let background = Background(position: CGPoint(x: 0, y: 0))
-        addChild(background)
         
         let enemyMasterNode = EnemyManager.enemyMasterNode
         

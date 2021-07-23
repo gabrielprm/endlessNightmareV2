@@ -11,7 +11,7 @@ import SpriteKit
 class Background: SKSpriteNode {
     
     init(position: CGPoint) {
-        let background = SKTexture(imageNamed: "Background")
+        let background = SKTexture(imageNamed: "background")
         
         super.init(texture: background, color: .clear, size: background.size())
     
