@@ -21,7 +21,7 @@ struct EnemyManager {
         
         switch random {
         case 1:
-            PreSetsEnemy.everyLineOcuped()
+            //PreSetsEnemy.everyLineOcuped()
             break
         case 2:
             PreSetsEnemy.line1Ocuped()
@@ -51,10 +51,15 @@ struct EnemyManager {
     
     static func enemyDie(enemyMasterNode: SKNode) {
        
-        let ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
-        let posAtualXMAsterNode = enemyMasterNode.position.x
+        var ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
+        var posAtualXMAsterNode = enemyMasterNode.position.x
         if posAtualXMAsterNode - ultimaPosXMasterNode  <= -980{
             enemyMasterNode.removeChildren(in: [enemyMasterNode.children.first!])
+        }
+        
+        ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
+        posAtualXMAsterNode = enemyMasterNode.position.x
+        if posAtualXMAsterNode - ultimaPosXMasterNode  <= -980{
             enemyMasterNode.removeChildren(in: [enemyMasterNode.children.first!])
         }
     }

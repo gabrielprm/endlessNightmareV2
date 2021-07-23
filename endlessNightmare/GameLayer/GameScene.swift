@@ -172,7 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
         i = 0
     }
-        i += difficultyMultiplier.difficultyCounter * 0.4
+        i += difficultyMultiplier.difficultyCounter * 0.6
     
         
     //E responsavel pela movimentacao dos inimigos
