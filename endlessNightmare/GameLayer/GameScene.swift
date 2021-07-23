@@ -84,14 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             
         })
-        
-//        let  enemyBornAction = EnemyManager.enemyBornAction()
-
         self.run(SKAction.repeatForever(movMap))
-        
-//        self.run(SKAction.repeatForever(SKAction.sequence([enemyBornAction, SKAction.wait(forDuration: i)])))
-        
-        
         score.run(SKAction.repeatForever(attPontos))
         
         setupGestures()
@@ -169,11 +162,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // spawn de inimigos
     if i > 120{
         EnemyManager.enemyBorn()
-        EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
         i = 0
     }
-        i += difficultyMultiplier.difficultyCounter * 0.6
-    
+    i += difficultyMultiplier.difficultyCounter
+    EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
         
     //E responsavel pela movimentacao dos inimigos
     EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))

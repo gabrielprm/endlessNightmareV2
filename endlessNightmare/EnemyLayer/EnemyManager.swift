@@ -50,17 +50,8 @@ struct EnemyManager {
 
     
     static func enemyDie(enemyMasterNode: SKNode) {
-       
-        var ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
-        var posAtualXMAsterNode = enemyMasterNode.position.x
-        if posAtualXMAsterNode - ultimaPosXMasterNode  <= -980{
-            enemyMasterNode.removeChildren(in: [enemyMasterNode.children.first!])
-        }
-        
-        ultimaPosXMasterNode = -((enemyMasterNode.children.first?.position.x)! - 580)
-        posAtualXMAsterNode = enemyMasterNode.position.x
-        if posAtualXMAsterNode - ultimaPosXMasterNode  <= -980{
-            enemyMasterNode.removeChildren(in: [enemyMasterNode.children.first!])
+        if PreSetsEnemy.enemyMasterNode.children.count > 10{
+            PreSetsEnemy.enemyMasterNode.removeChildren(in: [PreSetsEnemy.enemyMasterNode.children.first!])
         }
     }
 
