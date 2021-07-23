@@ -44,69 +44,8 @@ class Background: SKNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-//        self.zPosition = -1
+        self.zPosition = -1
         
-//        let firstBackground = SKSpriteNode(texture: fundo1, size: CGSize(width: 750, height: 1334))
-//        let secondBackground = SKSpriteNode(texture: fundo2, size: CGSize(width: 750, height: 1334))
-//        let thirdBackground = SKSpriteNode(texture: fundo3, size: CGSize(width: 750, height: 1334))
-//        let fourthBackground = SKSpriteNode(texture: fundo4, size: CGSize(width: 750, height: 1334))
-//
-//        addChild(firstBackground)
-//        addChild(secondBackground)
-//        addChild(thirdBackground)
-//        addChild(fourthBackground)
-//
-//        firstBackground.zPosition = -1
-//        secondBackground.zPosition = -2
-//        thirdBackground.zPosition = -3
-//        fourthBackground.zPosition = -4
-        
-        firstBackground = childNode(withName: "fundo1") as? SKSpriteNode
-        secondBackground = childNode(withName: "fundo2") as? SKSpriteNode
-        thirdBackground = childNode(withName: "fundo3") as? SKSpriteNode
-        fourthBackground = childNode(withName: "fundo4") as? SKSpriteNode
-        
-//        let backgrounds = [firstBackground, secondBackground, thirdBackground, fourthBackground]
-        
-        let fadeOut = SKAction.fadeOut(withDuration: 5)
-        let fadeIn = SKAction.fadeIn(withDuration: 5)
-        
-        let sequence = SKAction.sequence([SKAction.wait(forDuration: 5), fadeOut])
-        
-        firstBackground.run(sequence, completion: {
-            self.secondBackground.run(sequence, completion: {
-                self.thirdBackground.run(sequence, completion: {
-                    self.fourthBackground.run(sequence, completion: {
-                        self.firstBackground.run(fadeIn)
-                        
-                        self.secondBackground.alpha = 1
-                        self.thirdBackground.alpha = 1
-                        self.fourthBackground.alpha = 1
-                    })
-                })
-            })
-        })
-        
-//        let firstSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 1), fadeOut])
-//        let secondSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 2), fadeOut])
-//        let thirdSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 3), fadeOut])
-//        let fourthSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 4), fadeOut])
-//        let fiveSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 4), fadeIn])
-//
-//        self.firstBackground.run(firstSequence)
-//        self.secondBackground.run(secondSequence)
-//        self.thirdBackground.run(thirdSequence)
-//        self.fourthBackground.run(fourthSequence)
-//
-//        self.firstBackground.run(fiveSequence)
-//
-//        self.secondBackground.alpha = 1
-//        self.thirdBackground.alpha = 1
-//        self.fourthBackground.alpha = 1
+
     }
-    
-    func startRun() {
-        
-    }
-    
 }
