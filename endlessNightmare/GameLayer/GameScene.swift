@@ -12,17 +12,13 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKSpriteNode!
-    
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
-
     var masterNode = SKNode()
-  
     let difficultyMultiplier = DifficultyIncrement()
-    
     var i = 1.0
     var scoreInt = ScoreCalculator()
     var gameSound = SKAudioNode()
@@ -69,30 +65,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
             node, elapsedTime in
             
-            //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
             self.difficultyMultiplier.speedProgression()
             
-            //Calculo progressivo da pontuacao
             self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                
-                //Mostra a pontuacao na tela
-                //E dividido por 60, pois e a taxa de atualizacao do update
-                //score.text = "\(scoreInt.scoreCounter / 60)"
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
             
             
         })
-        
-//        let  enemyBornAction = EnemyManager.enemyBornAction()
-
         self.run(SKAction.repeatForever(movMap))
-        
-//        self.run(SKAction.repeatForever(SKAction.sequence([enemyBornAction, SKAction.wait(forDuration: i)])))
-        
-        
+
         score.run(SKAction.repeatForever(attPontos))
         
         setupGestures()
@@ -176,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         i = 0
     }
     i += difficultyMultiplier.difficultyCounter
-    
+    print(difficultyMultiplier.difficultyCounter)
         
     //E responsavel pela movimentacao dos inimigos
     EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))

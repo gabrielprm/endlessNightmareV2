@@ -34,10 +34,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc static func sucessFullyBookedFlight(){
-        HaptictsManager.shared.vibrate(for: .success)
-    }
-    
     override var shouldAutorotate: Bool {
         return true
     }
