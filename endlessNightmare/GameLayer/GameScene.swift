@@ -90,6 +90,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         score.run(SKAction.repeatForever(attPontos))
+        
+        setupGestures()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -23,8 +23,8 @@ class CharacterGenerator: SKSpriteNode {
         let physics = SKPhysicsBody(rectangleOf: size)
         
         physics.isDynamic = false
-        physics.categoryBitMask = ContactCategory.character.rawValue
-        physics.contactTestBitMask = ContactCategory.enemy.rawValue
+        physics.categoryBitMask = 2
+        physics.contactTestBitMask = 1
         physics.collisionBitMask = 0 // Ignorar colisão
         
         physicsBody = physics
