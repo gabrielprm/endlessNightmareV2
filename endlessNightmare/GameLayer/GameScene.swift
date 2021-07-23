@@ -20,8 +20,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score: SKLabelNode! = nil
 
     var masterNode = SKNode()
-
-    var masterNodeLastPosition:CGFloat!
   
     let difficultyMultiplier = DifficultyIncrement()
     
@@ -52,17 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(enemyMasterNode)
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeUp.direction = .up
-        view.addGestureRecognizer(swipeUp)
-        
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeDown.direction = .down
-        view.addGestureRecognizer(swipeDown)
-        
-
-        addChild(masterNode)
-        masterNodeLastPosition = masterNode.position.x
+        setupGestures()
 
         physicsWorld.contactDelegate = self
     }
@@ -107,6 +95,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func setupGestures() {
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeUp.direction = .up
+        view!.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeDown.direction = .down
+        view!.addGestureRecognizer(swipeDown)
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
@@ -123,12 +121,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Calculo progressivo da pontuacao
         scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
-        
-        //?
-        if masterNodeLastPosition - masterNode.position.x > MapData.initialXPositionSecondMap{
-            masterNodeLastPosition = masterNode.position.x + 1190
-            masterNode.removeChildren(in: [masterNode.children.first!])
-        }
         
         // Cria um inimigo a cada x periodos
         if i > 120 {
