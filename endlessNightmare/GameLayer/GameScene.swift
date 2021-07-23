@@ -26,8 +26,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var i = 1.0
     var scoreInt = ScoreCalculator()
     
-    
-    
     override func didMove(to view: SKView) {
         background = childNode(withName: "background") as? SKSpriteNode
         
@@ -47,24 +45,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(character)
         
         let enemyMasterNode = EnemyManager.enemyMasterNode
-//
+        
         enemyMasterNode.removeAllChildren()
-//
         enemyMasterNode.removeFromParent()
+        
         addChild(enemyMasterNode)
         
 //        physicsWorld.contactDelegate = self
         
-        
-        let movMap = SKAction.customAction(withDuration: 1, actionBlock: {
-           node, elapsedTime in
-
-            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
-       })
-        
-        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
-            node, elapsedTime in
-            
+        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
             //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
             self.difficultyMultiplier.speedProgression()
             
@@ -78,16 +67,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //score.text = "\(scoreInt.scoreCounter / 60)"
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
-            
-            
         })
         
-//        let  enemyBornAction = EnemyManager.enemyBornAction()
-
-        self.run(SKAction.repeatForever(movMap))
+//        MapManager.moveMap(scene: self, firstMap: mapa, secondMap: mapa2, count: CGFloat(difficultyMultiplier.difficultyCounter))
         
-//        self.run(SKAction.repeatForever(SKAction.sequence([enemyBornAction, SKAction.wait(forDuration: i)])))
+        let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
+            
+            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+        })
         
+        run(SKAction.repeatForever(movMap))
         
         score.run(SKAction.repeatForever(attPontos))
         
@@ -109,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             addChild(buttonPlay)
             
-            node.isUserInteractionEnabled = true
+            buttonPause.isUserInteractionEnabled = true
             isPaused = true
         } else if nodeName == "buttonPlay" {
             node.removeFromParent()
@@ -153,19 +142,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view!.presentScene(gameOverScene, transition: transition)
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
+        // spawn de inimigos
+        if i > 120 {
+            EnemyManager.enemyBorn()
+            EnemyManager.enemyDie()
+            i = 0
+        }
         
-    // spawn de inimigos
-    if i > 120{
-        EnemyManager.enemyBorn()
-        EnemyManager.enemyDie()
-        i = 0
-    }
-    i += difficultyMultiplier.difficultyCounter
-    
-        
-    //E responsavel pela movimentacao dos inimigos
-    EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
+        i += difficultyMultiplier.difficultyCounter
+            
+        //E responsavel pela movimentacao dos inimigos
+        EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
     }
 }
