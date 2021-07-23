@@ -41,16 +41,6 @@ struct EnemyManager {
         enemyMasterNode.addChild(node)
     }
     
-//    static func enemyBornAction() -> SKAction{
-//
-//        let criaInimigos = SKAction.customAction(withDuration: 0.0, actionBlock: {
-//            node, elapsedTime in
-//
-//            EnemyManager.enemyBorn()
-//        })
-//        return criaInimigos
-//    }
-    
 
     static func enemyDie(node: SKSpriteNode){
        
@@ -60,7 +50,7 @@ struct EnemyManager {
     //   masterNode.run(SKAction.moveBy(x: MapData.movXCoefficient, y: MapData.movYCoefficient, duration: 1))
 
     static func move(count:CGFloat ) {
-        enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient * count, y: MapData.movYCoefficient * count, duration: 1))
+        enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient * count, y: MapData.movYCoefficient * count, duration: 0.1))
 
     }
     
