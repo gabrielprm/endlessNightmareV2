@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreInt = ScoreCalculator()
     
     override func didMove(to view: SKView) {
-        background = childNode(withName: "background") as? SKSpriteNode
+//        background = childNode(withName: "background") as? SKSpriteNode
         
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
         
