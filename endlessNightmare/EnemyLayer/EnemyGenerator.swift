@@ -19,8 +19,8 @@ class EnemyGenerator: SKSpriteNode {
         let physics = SKPhysicsBody(circleOfRadius: 10)
         
         physics.affectedByGravity = false
-        physics.categoryBitMask = 2
-        physics.contactTestBitMask = 1
+        physics.categoryBitMask = ContactCategory.enemy.rawValue
+        physics.contactTestBitMask = ContactCategory.character.rawValue
         physics.collisionBitMask = 0 // Ignorar colisão
         
         physicsBody = physics
