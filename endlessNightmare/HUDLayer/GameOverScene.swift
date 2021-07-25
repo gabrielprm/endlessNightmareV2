@@ -12,11 +12,16 @@ class GameOverScene: SKScene {
     var phrase: SKLabelNode! = nil
     var buttonHome: SKSpriteNode! = nil
     var buttonReplay: SKSpriteNode! = nil
+    var scoreLabel: SKLabelNode! = nil
     
     override func didMove(to view: SKView) {
+        
         phrase = childNode(withName: "phrase") as? SKLabelNode
         buttonHome = childNode(withName: "buttonHome") as? SKSpriteNode
         buttonReplay = childNode(withName: "buttonReplay") as? SKSpriteNode
+        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel.text = "High Score: \(String(UserDefaults.standard.integer(forKey: "highScore") as Int))"
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

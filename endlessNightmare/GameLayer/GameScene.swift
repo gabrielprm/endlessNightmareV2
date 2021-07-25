@@ -27,7 +27,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreInt = ScoreCalculator()
     var gameSound = SKAudioNode()
     
-    
     override func didMove(to view: SKView) {
         gameSound = SKAudioNode(fileNamed: "gameSound")
         addChild(gameSound)
@@ -127,11 +126,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
 
             switch swipeGesture.direction {
-            case .up:
+                case .up, .left:
                 GameViewController.sucessFullyBookedFlight()
                 CharacterManager.moveUp(character)
-            case .down:
-            
+                case .down, .right:
                 GameViewController.sucessFullyBookedFlight()
                 CharacterManager.moveDown(character)
             default:
@@ -148,20 +146,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
         view!.addGestureRecognizer(swipeDown)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = .left
+        view!.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeRight.direction = .right
+        view!.addGestureRecognizer(swipeRight)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let impactSound = SKAudioNode(fileNamed: "impactSoft.ogg")
-        addChild(impactSound)
-        
-        gameSound.run(SKAction.stop())
-        
+
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
-
+        
+        saveScore()
+        
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
+    }
+    
+    func saveScore() {
+        let newScore = (scoreInt.scoreCounter / 30)
+        
+        let defaults = UserDefaults.standard
+        let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
+        
+        if(newScore > highScore){
+            UserDefaults.standard.set(newScore, forKey: "highScore")
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
