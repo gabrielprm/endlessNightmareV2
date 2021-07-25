@@ -112,16 +112,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
 
             switch swipeGesture.direction {
-            case .up:
-                
-                haptich.oneVibrationHaptic()
-                CharacterManager.moveUp(character)
-            case .down:
-                
-                haptich.oneVibrationHaptic()
-                CharacterManager.moveDown(character)
-            default:
-                break
+                case .up, .left:
+                    haptich.oneVibrationHaptic()
+                    CharacterManager.moveUp(character)
+                case .down, .right:
+                    haptich.oneVibrationHaptic()
+                    CharacterManager.moveDown(character)
+                default:
+                    break
             }
         }
     }
@@ -134,13 +132,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
         view!.addGestureRecognizer(swipeDown)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeRight.direction = .right
+        view!.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = .left
+        view!.addGestureRecognizer(swipeLeft)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let impactSound = SKAudioNode(fileNamed: "impactSoft.ogg")
-        addChild(impactSound)
-        
         gameSound.run(SKAction.stop())
+        
+        saveScore()
         
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
@@ -149,6 +154,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
+    }
+    
+    func saveScore() {
+        let newScore = (scoreInt.scoreCounter / 30)
+        
+        let defaults = UserDefaults.standard
+        let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
+        
+        if(newScore > highScore){
+            UserDefaults.standard.set(newScore, forKey: "highScore")
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
