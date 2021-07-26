@@ -13,7 +13,7 @@ struct CoefficientOfVelocityCalculator {
     var wrappedValue: Double {
         get { return coefficient }
         set {
-            coefficient = log(newValue) * -Double(MapData.movXCoefficient) * 1.3
+            coefficient = log(newValue) * -Double(MapData.movXCoefficient) * 0.9
         }
     }
 }
@@ -26,7 +26,7 @@ class DifficultyIncrement {
     func speedProgression(){
 
         difficultyCounter = axysX
-        axysX += 0.1
+        axysX += 1
 
     }
 }
