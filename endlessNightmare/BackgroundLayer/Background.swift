@@ -63,46 +63,36 @@ class Background: SKNode {
         
         firstBackground = childNode(withName: "fundo1") as? SKSpriteNode
         secondBackground = childNode(withName: "fundo2") as? SKSpriteNode
-        thirdBackground = childNode(withName: "fundo3") as? SKSpriteNode
-        fourthBackground = childNode(withName: "fundo4") as? SKSpriteNode
+//        thirdBackground = childNode(withName: "fundo3") as? SKSpriteNode
+//        fourthBackground = childNode(withName: "fundo4") as? SKSpriteNode
         
-//        let backgrounds = [firstBackground, secondBackground, thirdBackground, fourthBackground]
+        let timeDuration: TimeInterval = 5
+        let wait = SKAction.wait(forDuration: timeDuration)
+        let fadeOut = SKAction.fadeOut(withDuration: timeDuration)
+        let fadeIn = SKAction.fadeIn(withDuration: timeDuration)
+        var nextTexture = 2
         
-        let fadeOut = SKAction.fadeOut(withDuration: 5)
-        let fadeIn = SKAction.fadeIn(withDuration: 5)
-        
-        let sequence = SKAction.sequence([SKAction.wait(forDuration: 5), fadeOut])
-        
-        firstBackground.run(sequence, completion: {
-            self.secondBackground.run(sequence, completion: {
-                self.thirdBackground.run(sequence, completion: {
-                    self.fourthBackground.run(sequence, completion: {
-                        self.firstBackground.run(fadeIn)
-                        
-                        self.secondBackground.alpha = 1
-                        self.thirdBackground.alpha = 1
-                        self.fourthBackground.alpha = 1
-                    })
-                })
-            })
-        })
-        
-//        let firstSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 1), fadeOut])
-//        let secondSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 2), fadeOut])
-//        let thirdSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 3), fadeOut])
-//        let fourthSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 4), fadeOut])
-//        let fiveSequence = SKAction.sequence([SKAction.wait(forDuration: 5 * 4), fadeIn])
+//        let sequence = SKAction.sequence([wait, fadeOut, SKAction.run {
+////            self.firstBackground.run(SKAction.animate(with: self.textures, timePerFrame: 0))
 //
-//        self.firstBackground.run(firstSequence)
-//        self.secondBackground.run(secondSequence)
-//        self.thirdBackground.run(thirdSequence)
-//        self.fourthBackground.run(fourthSequence)
+//            self.firstBackground.texture = self.textures[nextTexture]
 //
-//        self.firstBackground.run(fiveSequence)
+//            print(nextTexture)
 //
-//        self.secondBackground.alpha = 1
-//        self.thirdBackground.alpha = 1
-//        self.fourthBackground.alpha = 1
+//            nextTexture = nextTexture + 1 > self.textures.capacity - 1 ? 0 : nextTexture + 1
+//        }, wait, fadeIn, SKAction.run {
+////            self.secondBackground.run(SKAction.animate(with: self.textures, timePerFrame: 0))
+//
+//            self.secondBackground.texture = self.textures[nextTexture]
+//
+//            print(nextTexture)
+//
+//            nextTexture = nextTexture + 1 > self.textures.capacity - 1 ? 0 : nextTexture + 1
+//        }])
+        
+        let sequence = SKAction.sequence([wait, fadeOut, wait, fadeIn])
+        
+        firstBackground.run(SKAction.repeatForever(sequence))
     }
     
     func startRun() {
