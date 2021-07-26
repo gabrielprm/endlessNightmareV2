@@ -23,9 +23,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreInt = ScoreCalculator()
     var gameSound = SKAudioNode()
     let haptich = HaptictsManager()
+    var lastSongIcon = SKSpriteNode(imageNamed: "songOn")
     
     
     override func didMove(to view: SKView) {
+        lastSongIcon.name = "songOn"
+        lastSongIcon.setScale(5)
+        lastSongIcon.position = CGPoint(x: 250, y: 300)
+        lastSongIcon.zPosition = 20
+        
         gameSound = SKAudioNode(fileNamed: "gameSound")
         addChild(gameSound)
         
@@ -99,12 +105,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameSound.run(SKAction.pause())
             node.isUserInteractionEnabled = true
             isPaused = true
+            
+            addChild(lastSongIcon)
         } else if nodeName == "buttonPlay" {
             node.removeFromParent()
-            gameSound.run(SKAction.play())
+            lastSongIcon.removeFromParent()
+            if lastSongIcon.name == "songOn" {
+                gameSound.run(SKAction.play())
+            }
             buttonPause.isUserInteractionEnabled = false
             isPaused = false
         }
+        
+        if nodeName == "songOff" {
+            lastSongIcon.removeFromParent()
+            lastSongIcon.texture = SKTexture(imageNamed: "songOn")
+            lastSongIcon.name = "songOn"
+            addChild(lastSongIcon)
+        } else if nodeName == "songOn" {
+            lastSongIcon.removeFromParent()
+            lastSongIcon.texture = SKTexture(imageNamed: "songOff")
+            lastSongIcon.name = "songOff"
+            gameSound.run(SKAction.pause())
+            addChild(lastSongIcon)
+        }
+            
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -158,7 +183,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func saveScore() {
         let newScore = (scoreInt.scoreCounter / 30)
-        
         let defaults = UserDefaults.standard
         let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
         
