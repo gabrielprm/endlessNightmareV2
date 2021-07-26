@@ -12,22 +12,24 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKSpriteNode!
-    
     var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var score: SKLabelNode! = nil
-
     var masterNode = SKNode()
-  
     let difficultyMultiplier = DifficultyIncrement()
-    
     var i = 1.0
     var scoreInt = ScoreCalculator()
+    var gameSound = SKAudioNode()
+    let haptich = HaptictsManager()
+    
     
     override func didMove(to view: SKView) {
-//        background = childNode(withName: "background") as? SKSpriteNode
+        gameSound = SKAudioNode(fileNamed: "gameSound")
+        addChild(gameSound)
+        
+        background = childNode(withName: "background") as? SKSpriteNode
         
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
         
@@ -44,40 +46,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character = CharacterGenerator()
         addChild(character)
         
-        let enemyMasterNode = EnemyManager.enemyMasterNode
-        
+        let enemyMasterNode = PreSetsEnemy.enemyMasterNode
+//
         enemyMasterNode.removeAllChildren()
+
         enemyMasterNode.removeFromParent()
         
         addChild(enemyMasterNode)
         
-//        physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
         
-        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
-            //Funcao responsavel por aumenta a velocidade, e por consequencia a dificuldade
+        
+        let movMap = SKAction.customAction(withDuration: 1, actionBlock: {
+           node, elapsedTime in
+
+            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+       })
+        
+        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
+            node, elapsedTime in
+            
             self.difficultyMultiplier.speedProgression()
             
-            //Calculo progressivo da pontuacao
             self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                
-                //Mostra a pontuacao na tela
-                //E dividido por 60, pois e a taxa de atualizacao do update
-                //score.text = "\(scoreInt.scoreCounter / 60)"
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
-        })
-        
-//        MapManager.moveMap(scene: self, firstMap: mapa, secondMap: mapa2, count: CGFloat(difficultyMultiplier.difficultyCounter))
-        
-        let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
             
-            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+            
         })
-        
-        run(SKAction.repeatForever(movMap))
-        
+        self.run(SKAction.repeatForever(movMap))
         score.run(SKAction.repeatForever(attPontos))
         
         setupGestures()
@@ -97,12 +96,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             buttonPlay.setScale(4)
             
             addChild(buttonPlay)
-            
-            buttonPause.isUserInteractionEnabled = true
+            gameSound.run(SKAction.pause())
+            node.isUserInteractionEnabled = true
             isPaused = true
         } else if nodeName == "buttonPlay" {
             node.removeFromParent()
-            
+            gameSound.run(SKAction.play())
             buttonPause.isUserInteractionEnabled = false
             isPaused = false
         }
@@ -113,12 +112,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
 
             switch swipeGesture.direction {
-            case .up:
-                CharacterManager.moveUp(character)
-            case .down:
-                CharacterManager.moveDown(character)
-            default:
-                break
+                case .up, .left:
+                    haptich.oneVibrationHaptic()
+                    CharacterManager.moveUp(character)
+                case .down, .right:
+                    haptich.oneVibrationHaptic()
+                    CharacterManager.moveDown(character)
+                default:
+                    break
             }
         }
     }
@@ -131,28 +132,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = .down
         view!.addGestureRecognizer(swipeDown)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeRight.direction = .right
+        view!.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = .left
+        view!.addGestureRecognizer(swipeLeft)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        gameSound.run(SKAction.stop())
+        
+        saveScore()
+        
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
         
+        haptich.twoVibrationHaptic(for: .success)
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        // spawn de inimigos
-        if i > 120 {
-            EnemyManager.enemyBorn()
-            EnemyManager.enemyDie()
-            i = 0
-        }
+    func saveScore() {
+        let newScore = (scoreInt.scoreCounter / 30)
         
-        i += difficultyMultiplier.difficultyCounter
-            
-        //E responsavel pela movimentacao dos inimigos
-        EnemyManager.move(count: CGFloat(difficultyMultiplier.difficultyCounter))
+        let defaults = UserDefaults.standard
+        let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
+        
+        if(newScore > highScore){
+            UserDefaults.standard.set(newScore, forKey: "highScore")
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+    // spawn de inimigos
+    if i > 120{
+        EnemyManager.enemyBorn()
+        i = 0
+    }
+        i += difficultyMultiplier.difficultyCounter * 0.8
+    EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
+    print(difficultyMultiplier.difficultyCounter)
+
+        
+    //E responsavel pela movimentacao dos inimigos
+    EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
     }
 }

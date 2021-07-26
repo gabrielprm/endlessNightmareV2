@@ -8,6 +8,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import CoreHaptics
 
 class GameViewController: UIViewController {
 
@@ -24,14 +25,16 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
             }
             
+            
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
             view.showsNodeCount = true
             view.showsPhysics = true
+            
         }
     }
-
+    
     override var shouldAutorotate: Bool {
         return true
     }

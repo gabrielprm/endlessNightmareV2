@@ -12,11 +12,13 @@ class HomeScene: SKScene {
     var gameName: SKLabelNode! = nil
     var buttonPlay: SKSpriteNode! = nil
     var buttonSettings: SKSpriteNode! = nil
-    
+    var scoreLabel: SKLabelNode! = nil
     override func didMove(to view: SKView) {
         gameName = childNode(withName: "gameName") as? SKLabelNode
         buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode
         buttonSettings = childNode(withName: "buttonSettings") as? SKSpriteNode
+        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
