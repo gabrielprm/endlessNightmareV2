@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreInt = ScoreCalculator()
     let haptich = HaptictsManager()
     
-    let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
+    let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSound")
     
     override func didMove(to view: SKView) {
         if UserDefaults.standard.stateSong() {
@@ -37,10 +37,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         score = childNode(withName: "score") as? SKLabelNode
         
-        mapa = MapGenerator(imageName: "chao", zPosition: 1)
+        mapa = MapGenerator(imageName: "chao1", zPosition: 1)
         addChild(mapa)
         
-        mapa2 = MapGenerator(imageName: "chao", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
+        mapa2 = MapGenerator(imageName: "chao1", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
         addChild(mapa2)
         
         CharacterManager.rowPosition = 2
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(enemyMasterNode)
         
-        physicsWorld.contactDelegate = self
+//        physicsWorld.contactDelegate = self
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
 
@@ -69,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                node.text = "\(self.scoreInt.scoreCounter / 30)"
+                node.text = "\(self.scoreInt.scoreCounter / 60)"
             }
         })
         
@@ -187,21 +187,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
-    // spawn de inimigos
-        if tick > 120{
+        // spawn de inimigos
+        if tick > 120 {
             EnemyManager.enemyBorn()
             tick = 0
         }
-        if scoreInt.scoreCounter < 15000{
-            tick = tick + (difficultyMultiplier.difficultyCounter / 2)
-        } else{
-            tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
-        }
+        
+        tick += difficultyMultiplier.difficultyCounter * 0.5
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
-        print(difficultyMultiplier.difficultyCounter)
-
-            
+//        print(difficultyMultiplier.difficultyCounter)
+        
         //E responsavel pela movimentacao dos inimigos
         EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
     }

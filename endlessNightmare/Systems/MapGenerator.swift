@@ -18,6 +18,7 @@ public class MapGenerator: SKSpriteNode{
         self.position = position
         self.zPosition = zPosition
         self.isUserInteractionEnabled = true
+        self.setScale(0.6)
     }
     
     convenience init(imageName: String, zPosition: CGFloat) {
