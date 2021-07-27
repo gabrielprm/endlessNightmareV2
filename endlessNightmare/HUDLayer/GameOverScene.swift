@@ -20,6 +20,8 @@ class GameOverScene: SKScene {
         buttonReplay = childNode(withName: "buttonReplay") as? SKSpriteNode
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
+        let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameOverSceneSound")
+        addChild(gameSound)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
