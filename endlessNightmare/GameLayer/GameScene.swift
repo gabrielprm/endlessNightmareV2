@@ -187,16 +187,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // spawn de inimigos
-        if tick > 120 {
+        
+    // spawn de inimigos
+        if tick > 120{
             EnemyManager.enemyBorn()
             tick = 0
         }
-        
-        tick += difficultyMultiplier.difficultyCounter * 0.8
+        if scoreInt.scoreCounter < 15000{
+            tick = tick + (difficultyMultiplier.difficultyCounter / 2)
+        } else{
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
+        }
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
-//        print(difficultyMultiplier.difficultyCounter)
-        
+        print(difficultyMultiplier.difficultyCounter)
+
+            
         //E responsavel pela movimentacao dos inimigos
         EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
     }
