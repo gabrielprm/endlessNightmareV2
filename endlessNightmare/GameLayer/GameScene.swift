@@ -193,7 +193,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             tick = 0
         }
         
-        tick += difficultyMultiplier.difficultyCounter * 0.5
+        if scoreInt.scoreCounter < 15000{
+            tick = tick + (difficultyMultiplier.difficultyCounter / 2)
+        } else{
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
+        }
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
 //        print(difficultyMultiplier.difficultyCounter)
         
