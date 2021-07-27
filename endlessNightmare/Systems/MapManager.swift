@@ -16,11 +16,11 @@ class MapManager: SKNode{
         let distanceFirstToScond = CGPoint(x: firstMap.position.x - secondMap.position.x, y: firstMap.position.y - secondMap.position.y)
         let comprimentoFirstToScond = sqrt(Double(distanceFirstToScond.x * distanceFirstToScond.x + distanceFirstToScond.y * distanceFirstToScond.y))
         
-        if firstMap.position.x <= -920 {
+        if firstMap.position.x <= -930 {
             firstMap.position = CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap)
             firstMap.zPosition = 0
             secondMap.zPosition = 1
-        } else if secondMap.position.x <= -920 {
+        } else if secondMap.position.x <= -930 {
             secondMap.position = CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap)
             firstMap.zPosition = 1
             secondMap.zPosition = 0
@@ -33,10 +33,6 @@ class MapManager: SKNode{
         if comprimentoFirstToScond >= 1180 || secondMap.position.x < 150{
             secondMap.run(SKAction.moveBy(x: MapData.movXCoefficient * count * 0.9, y: MapData.movYCoefficient * count * 0.9, duration: 0.1))
         }
-        print(comprimentoFirstToScond)
-        print(".............\(comprimentoSecondToFirst)")
-        
     }
     
-
 }

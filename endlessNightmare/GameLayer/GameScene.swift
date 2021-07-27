@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreInt = ScoreCalculator()
     let haptich = HaptictsManager()
     
-    let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSound")
+    let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
     
     override func didMove(to view: SKView) {
         if UserDefaults.standard.stateSong() {
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(enemyMasterNode)
         
-//        physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
 

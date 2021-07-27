@@ -15,14 +15,14 @@ class AssetsReference {
     var backgrounds: [SKTexture] = []
     
     func preloadAssetsBackground() {
-        sprites.preload {
+        sprites.preload { [self] in
+            backgrounds.append(sprites.textureNamed("FundoTeste1"))
+            backgrounds.append(sprites.textureNamed("FundoTeste2"))
+            backgrounds.append(sprites.textureNamed("FundoTeste3"))
+            backgrounds.append(sprites.textureNamed("FundoTeste4"))
+            
             print("Loaded background textures!!!")
         }
-        
-        backgrounds.append(sprites.textureNamed("FundoTeste1"))
-        backgrounds.append(sprites.textureNamed("FundoTeste2"))
-        backgrounds.append(sprites.textureNamed("FundoTeste3"))
-        backgrounds.append(sprites.textureNamed("FundoTeste4"))
     }
     
 }
