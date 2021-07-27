@@ -199,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
         }
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
-        print(difficultyMultiplier.difficultyCounter)
+//        print(difficultyMultiplier.difficultyCounter)
 
             
         //E responsavel pela movimentacao dos inimigos

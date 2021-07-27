@@ -12,33 +12,11 @@ class Background: SKNode {
     
     var firstBackground: SKSpriteNode! = nil
     var secondBackground: SKSpriteNode! = nil
-    var thirdBackground: SKSpriteNode! = nil
-    var fourthBackground: SKSpriteNode! = nil
-    
-    let fundo1 = SKTexture(imageNamed: "FundoTeste1")
-    let fundo2 = SKTexture(imageNamed: "FundoTeste2")
-    let fundo3 = SKTexture(imageNamed: "FundoTeste3")
-    let fundo4 = SKTexture(imageNamed: "FundoTeste4")
-    
-    var textures: [SKTexture] {
-        return [fundo1, fundo2, fundo3, fundo4]
-    }
     
     override init() {
-//        let background = SKTexture(imageNamed: "background")
-        
-//        super.init(texture: fundo1, color: .clear, size: fundo1.size())
-        
-//        self.setScale(1.5)
-//        self.position = position
         super.init()
         
         self.zPosition = -1
-        
-        let animation = SKAction.animate(with: textures, timePerFrame: 1)
-        let runAnimation = SKAction.repeatForever(animation)
-        
-        run(runAnimation)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,6 +24,28 @@ class Background: SKNode {
         
         self.zPosition = -1
         
-
+        firstBackground = childNode(withName: "fundo1") as? SKSpriteNode
+        secondBackground = childNode(withName: "fundo2") as? SKSpriteNode
+        
+        let timeDuration: TimeInterval = 3
+        let wait = SKAction.wait(forDuration: timeDuration)
+        let fadeOut = SKAction.fadeOut(withDuration: timeDuration)
+        let fadeIn = SKAction.fadeIn(withDuration: timeDuration)
+        var nextTexture = 2
+        
+        let sequence = SKAction.sequence([wait, fadeOut, SKAction.run {
+//            self.firstBackground.run(SKAction.animate(with: self.textures, timePerFrame: 0))
+            self.firstBackground.texture = AssetsReference.instance.backgrounds[nextTexture]
+            
+            nextTexture = nextTexture + 1 > AssetsReference.instance.backgrounds.capacity - 1 ? 0 : nextTexture + 1
+        }, wait, fadeIn, SKAction.run {
+//            self.secondBackground.run(SKAction.animate(with: self.textures, timePerFrame: 0))
+            
+            self.secondBackground.texture = AssetsReference.instance.backgrounds[nextTexture]
+            
+            nextTexture = nextTexture + 1 > AssetsReference.instance.backgrounds.capacity - 1 ? 0 : nextTexture + 1
+        }])
+        
+        self.firstBackground.run(SKAction.repeatForever(sequence))
     }
 }

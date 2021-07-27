@@ -20,6 +20,8 @@ class HomeScene: SKScene {
         buttonSettings = childNode(withName: "buttonSettings") as? SKSpriteNode
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
+        
+        AssetsReference.instance.preloadAssetsBackground()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
