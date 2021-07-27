@@ -17,7 +17,7 @@ class CharacterGenerator: SKSpriteNode {
         super.init(texture: textureCharacter1, color: .clear, size: textureCharacter1.size())
         
         position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
-        setScale(0.013)
+        setScale(0.25)
         zPosition = 4
         
         let physics = SKPhysicsBody(circleOfRadius: 10)

@@ -50,7 +50,7 @@ struct EnemyManager {
 
     
     static func enemyDie(enemyMasterNode: SKNode) {
-        if PreSetsEnemy.enemyMasterNode.children.count > 10{
+        if PreSetsEnemy.enemyMasterNode.children.count > 13{
             PreSetsEnemy.enemyMasterNode.removeChildren(in: [PreSetsEnemy.enemyMasterNode.children.first!])
         }
     }

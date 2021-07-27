@@ -10,11 +10,13 @@ import SpriteKit
 class EnemyGenerator: SKSpriteNode {
     
     init() {
-        let texture = SKTexture(imageNamed: "enemy")
-
-        super.init(texture: texture, color: .clear, size: texture.size())
+        let enemy = SKTexture(imageNamed: "enemy")
+        let enemy1 = SKTexture(imageNamed: "enemy1")
+        let textures = [enemy, enemy1]
         
-        setScale(0.12)
+        super.init(texture: enemy, color: .clear, size: enemy.size())
+        
+        setScale(0.25)
         
         let physics = SKPhysicsBody(circleOfRadius: 10)
         
@@ -24,6 +26,10 @@ class EnemyGenerator: SKSpriteNode {
         physics.collisionBitMask = 0 // Ignorar colisão
         
         physicsBody = physics
+        
+        let animateEnemy = SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 0.25))
+        run(animateEnemy)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
