@@ -13,6 +13,7 @@ class HomeScene: SKScene {
     var buttonPlay: SKSpriteNode! = nil
     var buttonSettings: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
+    
     override func didMove(to view: SKView) {
         gameName = childNode(withName: "gameName") as? SKLabelNode
         buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode

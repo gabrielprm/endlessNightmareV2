@@ -13,6 +13,7 @@ class GameOverScene: SKScene {
     var buttonHome: SKSpriteNode! = nil
     var buttonReplay: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
+    
     override func didMove(to view: SKView) {
         phrase = childNode(withName: "phrase") as? SKLabelNode
         buttonHome = childNode(withName: "buttonHome") as? SKSpriteNode

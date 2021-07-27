@@ -12,32 +12,28 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKSpriteNode!
-    var character: SKNode! = nil
     var mapa: SKSpriteNode! = nil
     var mapa2: SKSpriteNode! = nil
+    var character: SKNode! = nil
     var buttonPause: SKSpriteNode! = nil
+    var menuPause: PauseMenu! = nil
     var score: SKLabelNode! = nil
-    var masterNode = SKNode()
-    let difficultyMultiplier = DifficultyIncrement()
-    var i = 1.0
-    var scoreInt = ScoreCalculator()
-    var gameSound = SKAudioNode()
-    let haptich = HaptictsManager()
-    var lastSongIcon = SKSpriteNode(imageNamed: "songOn")
+    var tick = 1.0
     
+    let difficultyMultiplier = DifficultyIncrement()
+    let scoreInt = ScoreCalculator()
+    let haptich = HaptictsManager()
+    
+    let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSound")
     
     override func didMove(to view: SKView) {
-        lastSongIcon.name = "songOn"
-        lastSongIcon.setScale(5)
-        lastSongIcon.position = CGPoint(x: 250, y: 300)
-        lastSongIcon.zPosition = 20
-        
-        gameSound = SKAudioNode(fileNamed: "gameSound")
-        addChild(gameSound)
+        if UserDefaults.standard.stateSong() {
+            addChild(gameSound)
+        }
         
         background = childNode(withName: "background") as? SKSpriteNode
-        
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
+        menuPause = childNode(withName: "menuPause") as? PauseMenu
         
         score = childNode(withName: "score") as? SKLabelNode
         
@@ -53,24 +49,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(character)
         
         let enemyMasterNode = PreSetsEnemy.enemyMasterNode
-//
+        
         enemyMasterNode.removeAllChildren()
-
         enemyMasterNode.removeFromParent()
         
         addChild(enemyMasterNode)
         
         physicsWorld.contactDelegate = self
         
-        
-        let movMap = SKAction.customAction(withDuration: 1, actionBlock: {
-           node, elapsedTime in
+        let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
 
             MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
-       })
+        })
         
-        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: {
-            node, elapsedTime in
+        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
             
             self.difficultyMultiplier.speedProgression()
             
@@ -79,9 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let node = node as? SKLabelNode{
                 node.text = "\(self.scoreInt.scoreCounter / 30)"
             }
-            
-            
         })
+        
         self.run(SKAction.repeatForever(movMap))
         score.run(SKAction.repeatForever(attPontos))
         
@@ -93,43 +84,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         guard let touchLocation = touch?.location(in: self) else { return }
         guard let node = nodes(at: touchLocation).first else { return }
-        guard let nodeName = node.name else { return }
+//        guard let nodeName = node.name else { return }
         
-        if nodeName == "buttonPause" {
-            let buttonPlay = SKSpriteNode(imageNamed: "button_play")
-            buttonPlay.name = "buttonPlay"
-            buttonPlay.zPosition = 999
-            buttonPlay.setScale(4)
+        if node == buttonPause {
+            menuPause.toggleVisibility()
             
-            addChild(buttonPlay)
-            gameSound.run(SKAction.pause())
-            node.isUserInteractionEnabled = true
+            if gameSound.parent != nil {
+                gameSound.run(SKAction.pause())
+            }
+            
+            buttonPause.isUserInteractionEnabled = true
             isPaused = true
+        } else if node == menuPause.buttonPlay {
+            menuPause.toggleVisibility()
             
-            addChild(lastSongIcon)
-        } else if nodeName == "buttonPlay" {
-            node.removeFromParent()
-            lastSongIcon.removeFromParent()
-            if lastSongIcon.name == "songOn" {
+            if gameSound.parent != nil {
                 gameSound.run(SKAction.play())
             }
+            
             buttonPause.isUserInteractionEnabled = false
             isPaused = false
-        }
-        
-        if nodeName == "songOff" {
-            lastSongIcon.removeFromParent()
-            lastSongIcon.texture = SKTexture(imageNamed: "songOn")
-            lastSongIcon.name = "songOn"
-            addChild(lastSongIcon)
-        } else if nodeName == "songOn" {
-            lastSongIcon.removeFromParent()
-            lastSongIcon.texture = SKTexture(imageNamed: "songOff")
-            lastSongIcon.name = "songOff"
-            gameSound.run(SKAction.pause())
-            addChild(lastSongIcon)
-        }
+        } else if node == menuPause.buttonSong {
+            let defaults = UserDefaults.standard
             
+            defaults.changeStateSong()
+            menuPause.changeTextureSong()
+            
+            if defaults.stateSong() {
+                addChild(gameSound)
+            } else {
+                gameSound.removeFromParent()
+            }
+        } else if node == menuPause.buttonHome {
+            let transition = SKTransition.fade(withDuration: 1.5)
+            let gameOverScene = SKScene(fileNamed: "HomeScene")!
+            
+            gameOverScene.scaleMode = .aspectFill
+            
+            view!.presentScene(gameOverScene, transition: transition)
+        }
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -168,7 +161,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        gameSound.run(SKAction.stop())
+        if gameSound.parent != nil {
+            gameSound.run(SKAction.stop())
+        }
         
         saveScore()
         
@@ -186,7 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let defaults = UserDefaults.standard
         let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
         
-        if(newScore > highScore){
+        if newScore > highScore {
             UserDefaults.standard.set(newScore, forKey: "highScore")
         }
     }
