@@ -28,6 +28,7 @@
 		89B8D71226AB597400B57008 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B8D71126AB597400B57008 /* HapticsManager.swift */; };
 		89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FC26A0C56B00AAEEDC /* MapManager.swift */; };
 		89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */; };
+		B22EB96226B0B41C005828D3 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EB96126B0B41C005828D3 /* Assets.swift */; };
 		B25C9A6226AF71DD00295708 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C9A6126AF71DD00295708 /* UserDefaults.swift */; };
 		B27DDF9826A6813600AA451D /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DDF9726A6813600AA451D /* CharacterManager.swift */; };
 		B2A7D89426A240FF0022F268 /* EnemyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A7D89326A240FF0022F268 /* EnemyManager.swift */; };
@@ -61,6 +62,7 @@
 		89B8D71126AB597400B57008 /* HapticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		89F812FC26A0C56B00AAEEDC /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		89F812FE26A0E7E500AAEEDC /* CharacterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenerator.swift; sourceTree = "<group>"; };
+		B22EB96126B0B41C005828D3 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		B25C9A6126AF71DD00295708 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B27DDF9726A6813600AA451D /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
 		B2A7D89326A240FF0022F268 /* EnemyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyManager.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				894BEC7826A097770032BE71 /* MapGenerator.swift */,
 				894BEC8326A0C2880032BE71 /* MapData.swift */,
 				89F812FC26A0C56B00AAEEDC /* MapManager.swift */,
+				B22EB96126B0B41C005828D3 /* Assets.swift */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				89B524E3269CAF6600C3FD33 /* GameViewController.swift in Sources */,
 				894BEC8426A0C2880032BE71 /* MapData.swift in Sources */,
 				B2B4177226A61EC8004CE918 /* GameOverScene.swift in Sources */,
+				B22EB96226B0B41C005828D3 /* Assets.swift in Sources */,
 				89F812FD26A0C56B00AAEEDC /* MapManager.swift in Sources */,
 				89F812FF26A0E7E500AAEEDC /* CharacterGenerator.swift in Sources */,
 				89B8D71226AB597400B57008 /* HapticsManager.swift in Sources */,
