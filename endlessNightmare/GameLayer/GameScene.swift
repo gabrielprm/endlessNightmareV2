@@ -7,7 +7,7 @@
 
 import Foundation
 import SpriteKit
-import GameplayKit
+import GameKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let haptich = HaptictsManager()
     
     let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
+    
     
     override func didMove(to view: SKView) {
         if UserDefaults.standard.stateSong() {
@@ -174,10 +175,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverScene.scaleMode = .aspectFill
         
         view!.presentScene(gameOverScene, transition: transition)
+        
+        if #available(iOS 14.0, *) {
+            points()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @available(iOS 14.0, *)
+    func points(){
+        if GKLocalPlayer.local.isAuthenticated{
+            let newScore = (scoreInt.scoreCounter / 60)
+            GKLeaderboard.submitScore(newScore, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["ThePlan"], completionHandler: {erro in print(erro?.localizedDescription as Any)})
+        }
     }
     
     func saveScore() {
-        let newScore = (scoreInt.scoreCounter / 30)
+        let newScore = (scoreInt.scoreCounter / 60)
         let defaults = UserDefaults.standard
         let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
         

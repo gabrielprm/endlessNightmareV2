@@ -22,6 +22,7 @@ class GameOverScene: SKScene {
         scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
         let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameOverSceneSound")
         addChild(gameSound)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
