@@ -172,6 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case .down, .right:
                     haptich.oneVibrationHaptic()
                     CharacterManager.moveDown(character)
+                    
                 default:
                     break
             }
@@ -179,6 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupGestures() {
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeUp.direction = .up
         view!.addGestureRecognizer(swipeUp)
@@ -194,6 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeLeft.direction = .left
         view!.addGestureRecognizer(swipeLeft)
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -241,7 +244,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
-//        print(difficultyMultiplier.difficultyCounter)
         
         //E responsavel pela movimentacao dos inimigos
         EnemyManager.move(enemyMasterNode: PreSetsEnemy.enemyMasterNode, count: CGFloat(difficultyMultiplier.difficultyCounter))
