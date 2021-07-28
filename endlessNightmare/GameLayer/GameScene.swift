@@ -37,7 +37,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         GameScene.sharedInstance = self
         
         
-        
         background = childNode(withName: "background") as? SKSpriteNode
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
         menuPause = childNode(withName: "menuPause") as? PauseMenu
@@ -62,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(enemyMasterNode)
         
-        physicsWorld.contactDelegate = self
+        //physicsWorld.contactDelegate = self
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
 
