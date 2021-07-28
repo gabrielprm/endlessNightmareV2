@@ -70,7 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                node.text = "\(self.scoreInt.scoreCounter / 30)"
+                node.text = "\(self.scoreInt.scoreCounter / 60)"
             }
         })
         
