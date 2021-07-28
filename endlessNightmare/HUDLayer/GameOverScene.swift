@@ -13,7 +13,7 @@ class GameOverScene: SKScene {
     var buttonHome: SKSpriteNode! = nil
     var buttonReplay: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
-    var currentScoreLabel: SKLabelNode! = nil
+    let haptich = HaptictsManager()
     
     override func didMove(to view: SKView) {
         phrase = childNode(withName: "phrase") as? SKLabelNode
@@ -40,18 +40,19 @@ class GameOverScene: SKScene {
         if node == buttonHome {
             let transition = SKTransition.fade(withDuration: 1.5)
             let homeScene = SKScene(fileNamed: "HomeScene")!
-            
+            haptich.oneVibrationHaptic()
+
             homeScene.scaleMode = .aspectFill
             
             view!.presentScene(homeScene, transition: transition)
         } else if node == buttonReplay {
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
-            
+            haptich.oneVibrationHaptic()
+
             gameScene.scaleMode = .aspectFill
             
             view!.presentScene(gameScene, transition: transition)
         }
     }
-    
 }

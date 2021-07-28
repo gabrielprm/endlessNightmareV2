@@ -99,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             buttonPause.alpha = 0
             menuPause.toggleVisibility()
-            
+            haptich.oneVibrationHaptic()
             if gameSound.parent != nil {
                 gameSound.run(SKAction.pause())
             }
@@ -112,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             buttonPause.alpha = 100
             menuPause.toggleVisibility()
-            
+            haptich.oneVibrationHaptic()
             if gameSound.parent != nil {
                 gameSound.run(SKAction.play())
             }
@@ -127,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             defaults.changeStateSong()
             menuPause.changeTextureSong()
-            
+            haptich.oneVibrationHaptic()
             if defaults.stateSong() {
                 addChild(gameSound)
             } else {
@@ -140,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let gameOverScene = SKScene(fileNamed: "HomeScene")!
             
             gameOverScene.scaleMode = .aspectFill
-            
+            haptich.oneVibrationHaptic()
             view!.presentScene(gameOverScene, transition: transition)
             
         }
@@ -227,12 +227,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             tick = 0
         }
         
-        if isPausing {
-            self.isPaused = true
-            return
-        } 
-        
-        tick += difficultyMultiplier.difficultyCounter * 0.5
+        if scoreInt.scoreCounter < 15000{
+            tick = tick + (difficultyMultiplier.difficultyCounter / 2)
+        } else{
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
+        }
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
 //        print(difficultyMultiplier.difficultyCounter)
         
