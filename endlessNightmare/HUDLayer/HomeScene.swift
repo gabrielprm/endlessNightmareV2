@@ -6,17 +6,24 @@
 //
 
 import SpriteKit
+import GameKit
 
-class HomeScene: SKScene {
+class HomeScene: SKScene, GKGameCenterControllerDelegate {
     
+
 
     let haptich = HaptictsManager()
     var gameHomeSound = SKAudioNode(fileNamed: "homeSceneSound")
     var buttonMusic: SKSpriteNode!
-
+    var gameCenter: SKSpriteNode!
     
     override func didMove(to view: SKView) {
+        
         buttonMusic = childNode(withName: "music") as? SKSpriteNode
+        gameName = childNode(withName: "gameName") as? SKLabelNode
+        buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode
+        buttonSettings = childNode(withName: "buttonSettings") as? SKSpriteNode
+        gameCenter = childNode(withName: "gameCenter") as? SKSpriteNode
         
         Music.changeTextureMusic(buttonMusic)
         
@@ -32,6 +39,7 @@ class HomeScene: SKScene {
         guard let node = nodes(at: touchLocation).first else { return }
         
         if node == buttonMusic {
+            
             let defaults = UserDefaults.standard
             
             defaults.changeStateMusic()
@@ -42,6 +50,11 @@ class HomeScene: SKScene {
             } else {
                 gameHomeSound.removeFromParent()
             }
+            
+        } else if node == gameCenter {
+            
+            transition()
+            
         } else {
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
@@ -51,7 +64,20 @@ class HomeScene: SKScene {
             haptich.oneVibrationHaptic()
 
             view!.presentScene(gameScene, transition: transition)
+
         }
     }
     
+    func transition() {
+        let rootViewController = self.view?.window?.rootViewController
+        let gameCenter = GKGameCenterViewController()
+        gameCenter.gameCenterDelegate = self
+        
+        rootViewController?.present(gameCenter, animated: true, completion: nil)
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+
 }

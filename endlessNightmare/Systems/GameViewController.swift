@@ -7,13 +7,15 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
+import GameKit
 import CoreHaptics
 
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        autenticate()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -29,6 +31,16 @@ class GameViewController: UIViewController {
             
             AssetsReference.instance.preloadAssetsBackground()
 
+        }
+    }
+    
+    func autenticate(){
+        let localPlayer = GKLocalPlayer.local
+        
+        localPlayer.authenticateHandler = {view, erro in
+            if view != nil{
+                self.present(view!, animated: true, completion: nil)
+            }
         }
     }
     
