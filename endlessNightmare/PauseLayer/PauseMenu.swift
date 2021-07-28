@@ -11,7 +11,7 @@ class PauseMenu: SKSpriteNode {
     
     var buttonPlay: SKSpriteNode!
     var buttonHome: SKSpriteNode!
-    var buttonSong: SKSpriteNode!
+    var buttonMusic: SKSpriteNode!
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         fatalError("init() has not been implemented")
@@ -20,20 +20,13 @@ class PauseMenu: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode
-        buttonHome = childNode(withName: "buttonHome") as? SKSpriteNode
-        buttonSong = childNode(withName: "buttonSong") as? SKSpriteNode
+        buttonPlay = childNode(withName: "play") as? SKSpriteNode
+        buttonHome = childNode(withName: "home") as? SKSpriteNode
+        buttonMusic = childNode(withName: "music") as? SKSpriteNode
         
-        changeTextureSong()
+        Music.changeTextureMusicPause(buttonMusic)
         
         isHidden = true
-    }
-    
-    func changeTextureSong() {
-        let defaults = UserDefaults.standard
-        let texture = SKTexture(imageNamed: defaults.stateSong() ? "button_songOn" : "button_songOff")
-        
-        buttonSong.texture = texture
     }
     
     func toggleVisibility() {

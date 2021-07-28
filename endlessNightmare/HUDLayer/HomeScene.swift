@@ -9,22 +9,17 @@ import SpriteKit
 
 class HomeScene: SKScene {
     
-    var gameName: SKLabelNode! = nil
-    var buttonPlay: SKSpriteNode! = nil
-    var buttonSettings: SKSpriteNode! = nil
-    var scoreLabel: SKLabelNode! = nil
+    var gameHomeSound = SKAudioNode(fileNamed: "homeSceneSound")
+    var buttonMusic: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        gameName = childNode(withName: "gameName") as? SKLabelNode
-        buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode
-        buttonSettings = childNode(withName: "buttonSettings") as? SKSpriteNode
-        scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
-        scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
+        buttonMusic = childNode(withName: "music") as? SKSpriteNode
         
-        let gameSound: SKAudioNode = SKAudioNode(fileNamed: "homeSceneSound")
-        addChild(gameSound)
+        Music.changeTextureMusic(buttonMusic)
         
-        AssetsReference.instance.preloadAssetsBackground()
+        if UserDefaults.standard.stateMusic() {
+            addChild(gameHomeSound)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -33,15 +28,24 @@ class HomeScene: SKScene {
         guard let touchLocation = touch?.location(in: self) else { return }
         guard let node = nodes(at: touchLocation).first else { return }
         
-        if node == buttonPlay {
+        if node == buttonMusic {
+            let defaults = UserDefaults.standard
+            
+            defaults.changeStateMusic()
+            Music.changeTextureMusic(buttonMusic)
+            
+            if defaults.stateMusic() {
+                addChild(gameHomeSound)
+            } else {
+                gameHomeSound.removeFromParent()
+            }
+        } else {
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
-            
+
             gameScene.scaleMode = .aspectFill
-            
+
             view!.presentScene(gameScene, transition: transition)
-        } else if node == buttonSettings {
-            
         }
     }
     
