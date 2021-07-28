@@ -32,12 +32,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if UserDefaults.standard.stateMusic() {
             addChild(gameMusic)
         }
-        //Pause Game in Background
-        
         
         buttonPause = childNode(withName: "pause") as? SKSpriteNode
         pauseMenu = childNode(withName: "pauseMenu") as? PauseMenu
-        
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         
         mapa = MapGenerator(imageName: "Road", zPosition: 1)
@@ -58,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(enemyMasterNode)
         
-        //physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
 
@@ -94,21 +91,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if node == buttonPause {
 
             pauseMenu.toggleVisibility()
+            buttonPause.isHidden = true
             
             if gameMusic.parent != nil {
                 gameMusic.run(SKAction.pause())
             }
             isPausing = true
             buttonPause.isUserInteractionEnabled = true
-            isPaused = true
+            
         } else if node == pauseMenu.buttonPlay {
+            
             pauseMenu.toggleVisibility()
             haptich.oneVibrationHaptic()
+            buttonPause.isHidden = false
             if gameMusic.parent != nil {
                 gameMusic.run(SKAction.play())
-
             }
-            
             buttonPause.isUserInteractionEnabled = false
             isPausing = false
             isPaused = false
@@ -138,12 +136,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-//    func pauseMenu(){
-//        buttonPause.alpha = 0
-//        menuPause.isHidden = false
+//    func menuPause(){
+//        if buttonPause != nil {
+//            buttonPause.isHidden = true
+//        }
+//        pauseMenu.isHidden = false
 //
-//        if gameSound.parent != nil {
-//            gameSound.run(SKAction.pause())
+//        if gameMusic.parent != nil {
+//            gameMusic.run(SKAction.pause())
 //        }
 //
 //        buttonPause.isUserInteractionEnabled = true
@@ -153,10 +153,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
 
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
-            //print(self.UISwipeGestureRecognizer.Direction)
-            
-            
             switch swipeGesture.direction {
                 case .up, .left:
                     haptich.oneVibrationHaptic()
@@ -164,7 +160,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case .down, .right:
                     haptich.oneVibrationHaptic()
                     CharacterManager.moveDown(character)
-                    
                 default:
                     break
             }
@@ -226,6 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             EnemyManager.enemyBorn()
             tick = 0
         }
+        
         if isPausing{
             self.isPaused = true
             return
