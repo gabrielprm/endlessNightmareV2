@@ -16,7 +16,7 @@ class EnemyGenerator: SKSpriteNode {
         
         super.init(texture: firstTexture, color: .clear, size: firstTexture.size())
         
-//        setScale(0.25)
+//        setScale(0.75)
         
         let physics = SKPhysicsBody(circleOfRadius: 10)
         

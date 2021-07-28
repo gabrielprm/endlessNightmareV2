@@ -20,14 +20,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pauseMenu: PauseMenu! = nil
     var scoreLabel: SKLabelNode! = nil
     var tick = 1.0
-    var isPausing: Bool = false
+    var isPausing = false
+    
     let difficultyMultiplier = DifficultyIncrement()
     let scoreInt = ScoreCalculator()
     let haptich = HaptictsManager()
-    
 
     let gameMusic: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
     
+    var scoreDisplay: Int {
+        return scoreInt.scoreCounter / 60
+    }
     
     override func didMove(to view: SKView) {
         if UserDefaults.standard.stateMusic() {
@@ -58,19 +61,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.contactDelegate = self
         
-        let movMap = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
+        let movMap = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
 
-            MapManager.updateMap(firstMap: self.mapa, secondMap: self.mapa2, count: CGFloat(self.difficultyMultiplier.difficultyCounter))
+            MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count: CGFloat(difficultyMultiplier.difficultyCounter))
         })
         
-        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { node, elapsedTime in
+        let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
             
-            self.difficultyMultiplier.speedProgression()
+            difficultyMultiplier.speedProgression()
             
-            self.scoreInt.scoreIncrement(counter: self.difficultyMultiplier.difficultyCounter)
+            scoreInt.scoreIncrement(counter: difficultyMultiplier.difficultyCounter)
             
             if let node = node as? SKLabelNode{
-                node.text = "\(self.scoreInt.scoreCounter / 30)"
+                node.text = "\(scoreDisplay)"
             }
         })
         
@@ -78,8 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.run(SKAction.repeatForever(attPontos))
         
         setupGestures()
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,24 +98,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if gameMusic.parent != nil {
                 gameMusic.run(SKAction.pause())
             }
+            
             isPausing = true
             buttonPause.isUserInteractionEnabled = true
-            
         } else if node == pauseMenu.buttonPlay {
             
             pauseMenu.toggleVisibility()
-            haptich.oneVibrationHaptic()
             buttonPause.isHidden = false
+            
             if gameMusic.parent != nil {
                 gameMusic.run(SKAction.play())
             }
+            
+            haptich.oneVibrationHaptic()
+            
             buttonPause.isUserInteractionEnabled = false
             isPausing = false
             isPaused = false
-
         } else if node == pauseMenu.buttonMusic {
             let defaults = UserDefaults.standard
-            haptich.oneVibrationHaptic()
+            
             defaults.changeStateMusic()
             Music.changeTextureMusicPause(pauseMenu.buttonMusic)
             
@@ -123,8 +126,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 gameMusic.removeFromParent()
             }
-
             
+            haptich.oneVibrationHaptic()
         } else if node == pauseMenu.buttonHome {
 
             let transition = SKTransition.fade(withDuration: 1.5)
@@ -133,7 +136,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOverScene.scaleMode = .aspectFill
             haptich.oneVibrationHaptic()
             view!.presentScene(gameOverScene, transition: transition)
-            
         }
     }
     
@@ -211,23 +213,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @available(iOS 14.0, *)
-    func points(){
-        if GKLocalPlayer.local.isAuthenticated{
-            let newScore = (scoreInt.scoreCounter / 60)
-            GKLeaderboard.submitScore(newScore, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["ThePlan"], completionHandler: {erro in print(erro?.localizedDescription as Any)})
+    func points() {
+        if GKLocalPlayer.local.isAuthenticated {
+            GKLeaderboard.submitScore(scoreDisplay, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["ThePlan"], completionHandler: { _ in })
         }
     }
     
     func saveScore() {
-        let newScore = (scoreInt.scoreCounter / 60)
         let defaults = UserDefaults.standard
         let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
         
-        if newScore > highScore {
-            UserDefaults.standard.set(newScore, forKey: "highScore")
+        if scoreDisplay > highScore {
+            UserDefaults.standard.set(scoreDisplay, forKey: "highScore")
         }
         
-        UserDefaults.standard.set(newScore, forKey: "score")
+        UserDefaults.standard.set(scoreDisplay, forKey: "score")
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -242,10 +242,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if scoreInt.scoreCounter < 15000{
-            tick = tick + (difficultyMultiplier.difficultyCounter / 2)
+        if scoreDisplay < 500 {
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.6)
         } else{
-            tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.8)
         }
         
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
