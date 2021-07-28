@@ -20,9 +20,6 @@ class HomeScene: SKScene, GKGameCenterControllerDelegate {
     override func didMove(to view: SKView) {
         
         buttonMusic = childNode(withName: "music") as? SKSpriteNode
-        gameName = childNode(withName: "gameName") as? SKLabelNode
-        buttonPlay = childNode(withName: "buttonPlay") as? SKSpriteNode
-        buttonSettings = childNode(withName: "buttonSettings") as? SKSpriteNode
         gameCenter = childNode(withName: "gameCenter") as? SKSpriteNode
         
         Music.changeTextureMusic(buttonMusic)
