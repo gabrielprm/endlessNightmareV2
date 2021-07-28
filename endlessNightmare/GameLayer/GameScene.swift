@@ -88,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if node == buttonPause {
             menuPause.toggleVisibility()
-            
+            haptich.oneVibrationHaptic()
             if gameSound.parent != nil {
                 gameSound.run(SKAction.pause())
             }
@@ -97,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isPaused = true
         } else if node == menuPause.buttonPlay {
             menuPause.toggleVisibility()
-            
+            haptich.oneVibrationHaptic()
             if gameSound.parent != nil {
                 gameSound.run(SKAction.play())
             }
@@ -109,7 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             defaults.changeStateSong()
             menuPause.changeTextureSong()
-            
+            haptich.oneVibrationHaptic()
             if defaults.stateSong() {
                 addChild(gameSound)
             } else {
@@ -120,7 +120,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let gameOverScene = SKScene(fileNamed: "HomeScene")!
             
             gameOverScene.scaleMode = .aspectFill
-            
+            haptich.oneVibrationHaptic()
             view!.presentScene(gameOverScene, transition: transition)
         }
     }
