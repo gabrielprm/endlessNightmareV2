@@ -13,13 +13,20 @@ class GameOverScene: SKScene {
     var buttonHome: SKSpriteNode! = nil
     var buttonReplay: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
+    var currentScoreLabel: SKLabelNode! = nil
     
     override func didMove(to view: SKView) {
         phrase = childNode(withName: "phrase") as? SKLabelNode
         buttonHome = childNode(withName: "buttonHome") as? SKSpriteNode
         buttonReplay = childNode(withName: "buttonReplay") as? SKSpriteNode
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+        
         scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
+        
+        currentScoreLabel = childNode(withName: "currentScore") as? SKLabelNode
+        currentScoreLabel.text = "Score: \(UserDefaults.standard.integer(forKey: "currentScore") as Int)"
+        
+        
         let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameOverSceneSound")
         addChild(gameSound)
     }

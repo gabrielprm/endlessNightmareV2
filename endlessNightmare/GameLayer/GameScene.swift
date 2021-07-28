@@ -19,17 +19,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var menuPause: PauseMenu! = nil
     var score: SKLabelNode! = nil
     var tick = 1.0
-    
+    var isPausing: Bool = false
     let difficultyMultiplier = DifficultyIncrement()
     let scoreInt = ScoreCalculator()
     let haptich = HaptictsManager()
     
     let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
+    //Pause Game in Background
+    static var sharedInstance = GameScene()
     
     override func didMove(to view: SKView) {
+        
         if UserDefaults.standard.stateSong() {
             addChild(gameSound)
         }
+        //Pause Game in Background
+        GameScene.sharedInstance = self
+        
+        
         
         background = childNode(withName: "background") as? SKSpriteNode
         buttonPause = childNode(withName: "buttonPause") as? SKSpriteNode
@@ -77,6 +84,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score.run(SKAction.repeatForever(attPontos))
         
         setupGestures()
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,6 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        guard let nodeName = node.name else { return }
         
         if node == buttonPause {
+            
+            buttonPause.alpha = 0
             menuPause.toggleVisibility()
             
             if gameSound.parent != nil {
@@ -94,8 +105,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             buttonPause.isUserInteractionEnabled = true
-            isPaused = true
+            isPausing = true
+            
+            
         } else if node == menuPause.buttonPlay {
+            
+            buttonPause.alpha = 100
             menuPause.toggleVisibility()
             
             if gameSound.parent != nil {
@@ -103,8 +118,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             buttonPause.isUserInteractionEnabled = false
+            isPausing = false
             isPaused = false
+           
         } else if node == menuPause.buttonSong {
+            
             let defaults = UserDefaults.standard
             
             defaults.changeStateSong()
@@ -115,14 +133,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 gameSound.removeFromParent()
             }
+            
         } else if node == menuPause.buttonHome {
+            
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameOverScene = SKScene(fileNamed: "HomeScene")!
             
             gameOverScene.scaleMode = .aspectFill
             
             view!.presentScene(gameOverScene, transition: transition)
+            
         }
+    }
+    
+    func pauseMenu(){
+        buttonPause.alpha = 0
+        menuPause.isHidden = false
+        
+        if gameSound.parent != nil {
+            gameSound.run(SKAction.pause())
+        }
+        
+        buttonPause.isUserInteractionEnabled = true
+        isPausing = true
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -177,13 +210,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func saveScore() {
-        let newScore = (scoreInt.scoreCounter / 30)
+        let newScore = (scoreInt.scoreCounter / 60)
         let defaults = UserDefaults.standard
         let highScore = defaults.integer(forKey: "highScore") as Int? ?? 0
         
         if newScore > highScore {
             UserDefaults.standard.set(newScore, forKey: "highScore")
         }
+        UserDefaults.standard.set(newScore, forKey: "currentScore")
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -192,6 +226,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             EnemyManager.enemyBorn()
             tick = 0
         }
+        
+        if isPausing {
+            self.isPaused = true
+            return
+        } 
         
         tick += difficultyMultiplier.difficultyCounter * 0.5
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
