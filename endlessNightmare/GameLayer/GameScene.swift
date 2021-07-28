@@ -128,6 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             defaults.changeStateSong()
             menuPause.changeTextureSong()
             haptich.oneVibrationHaptic()
+            
             if defaults.stateSong() {
                 addChild(gameSound)
             } else {
@@ -161,7 +162,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
 
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-
+            
+            //print(self.UISwipeGestureRecognizer.Direction)
+            
+            
             switch swipeGesture.direction {
                 case .up, .left:
                     haptich.oneVibrationHaptic()
@@ -226,12 +230,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             EnemyManager.enemyBorn()
             tick = 0
         }
+        if isPausing{
+            self.isPaused = true
+            return
+        }
         
         if scoreInt.scoreCounter < 15000{
             tick = tick + (difficultyMultiplier.difficultyCounter / 2)
         } else{
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.7)
         }
+        
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
 //        print(difficultyMultiplier.difficultyCounter)
         

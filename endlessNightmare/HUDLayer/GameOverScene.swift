@@ -23,9 +23,6 @@ class GameOverScene: SKScene {
         
         scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
         
-        currentScoreLabel = childNode(withName: "currentScore") as? SKLabelNode
-        currentScoreLabel.text = "Score: \(UserDefaults.standard.integer(forKey: "currentScore") as Int)"
-        
         
         let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameOverSceneSound")
         addChild(gameSound)
