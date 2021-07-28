@@ -24,8 +24,8 @@ class Background: SKNode {
         
         self.zPosition = -1
         
-        firstBackground = childNode(withName: "fundo1") as? SKSpriteNode
-        secondBackground = childNode(withName: "fundo2") as? SKSpriteNode
+        firstBackground = childNode(withName: "firstBackground") as? SKSpriteNode
+        secondBackground = childNode(withName: "secondBackground") as? SKSpriteNode
         
         let timeDuration: TimeInterval = 3
         let wait = SKAction.wait(forDuration: timeDuration)

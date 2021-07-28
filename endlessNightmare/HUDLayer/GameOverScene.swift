@@ -9,23 +9,27 @@ import SpriteKit
 
 class GameOverScene: SKScene {
     
-    var phrase: SKLabelNode! = nil
     var buttonHome: SKSpriteNode! = nil
-    var buttonReplay: SKSpriteNode! = nil
+    var buttonReturn: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
     let haptich = HaptictsManager()
+
+    var highScoreLabel: SKLabelNode! = nil
+    let gameMusic = SKAudioNode(fileNamed: "gameOverSceneSound")
     
     override func didMove(to view: SKView) {
-        phrase = childNode(withName: "phrase") as? SKLabelNode
-        buttonHome = childNode(withName: "buttonHome") as? SKSpriteNode
-        buttonReplay = childNode(withName: "buttonReplay") as? SKSpriteNode
+        buttonHome = childNode(withName: "home") as? SKSpriteNode
+        buttonReturn = childNode(withName: "return") as? SKSpriteNode
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
+
+        scoreLabel.text = "SCORE: \(UserDefaults.standard.integer(forKey: "score") as Int)"
         
-        scoreLabel.text = "High Score: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
+        highScoreLabel = childNode(withName: "highScoreLabel") as? SKLabelNode
+        highScoreLabel.text = "HIGH SCORE: \(UserDefaults.standard.integer(forKey: "highScore") as Int)"
         
-        
-        let gameSound: SKAudioNode = SKAudioNode(fileNamed: "gameOverSceneSound")
-        addChild(gameSound)
+        if UserDefaults.standard.stateMusic() {
+            addChild(gameMusic)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -42,7 +46,7 @@ class GameOverScene: SKScene {
             homeScene.scaleMode = .aspectFill
             
             view!.presentScene(homeScene, transition: transition)
-        } else if node == buttonReplay {
+        } else if node == buttonReturn {
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
             haptich.oneVibrationHaptic()

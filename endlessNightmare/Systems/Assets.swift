@@ -16,10 +16,9 @@ class AssetsReference {
     
     func preloadAssetsBackground() {
         sprites.preload { [self] in
-            backgrounds.append(sprites.textureNamed("FundoTeste1"))
-            backgrounds.append(sprites.textureNamed("FundoTeste2"))
-            backgrounds.append(sprites.textureNamed("FundoTeste3"))
-            backgrounds.append(sprites.textureNamed("FundoTeste4"))
+            for i in 1...4 {
+                backgrounds.append(sprites.textureNamed("Background0\(i)"))
+            }
             
             print("Loaded background textures!!!")
         }

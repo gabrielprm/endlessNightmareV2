@@ -27,6 +27,8 @@ class GameViewController: UIViewController {
             
             view.ignoresSiblingOrder = true
             
+            AssetsReference.instance.preloadAssetsBackground()
+
         }
     }
     

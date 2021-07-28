@@ -10,14 +10,14 @@ import SpriteKit
 class CharacterGenerator: SKSpriteNode {
     
     init() {
-        let textureCharacter1 = SKTexture(imageNamed: "character1")
-        let textureCharacter2 = SKTexture(imageNamed: "character2")
+        let textureCharacter1 = SKTexture(imageNamed: "Girl01")
+        let textureCharacter2 = SKTexture(imageNamed: "Girl02")
         let textures = [textureCharacter1, textureCharacter2]
         
         super.init(texture: textureCharacter1, color: .clear, size: textureCharacter1.size())
         
         position = CharacterManager.nodePosition(row: CharacterManager.rowPosition)
-        setScale(0.25)
+//        setScale(0.25)
         zPosition = 4
         
         let physics = SKPhysicsBody(circleOfRadius: 10)

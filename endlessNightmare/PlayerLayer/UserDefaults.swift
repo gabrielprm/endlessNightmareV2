@@ -9,12 +9,12 @@ import Foundation
 
 extension UserDefaults {
     
-    func stateSong() -> Bool {
-        return self.object(forKey: "song") != nil ? self.bool(forKey: "song") : true
+    func stateMusic() -> Bool {
+        return self.object(forKey: "music") != nil ? self.bool(forKey: "music") : true
     }
     
-    func changeStateSong() {
-        self.set(!self.stateSong(), forKey: "song")
+    func changeStateMusic() {
+        self.set(!self.stateMusic(), forKey: "music")
     }
     
 }
