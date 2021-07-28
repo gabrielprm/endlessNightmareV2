@@ -141,9 +141,6 @@
 				89B524DA269CAF6600C3FD33 /* AppDelegate.swift */,
 				894BEC7626A097610032BE71 /* DifficultyIncrement.swift */,
 				89B524E2269CAF6600C3FD33 /* GameViewController.swift */,
-				894BEC7826A097770032BE71 /* MapGenerator.swift */,
-				894BEC8326A0C2880032BE71 /* MapData.swift */,
-				89F812FC26A0C56B00AAEEDC /* MapManager.swift */,
 				B22EB96126B0B41C005828D3 /* Assets.swift */,
 			);
 			path = Systems;
@@ -188,6 +185,7 @@
 				89B8D71326AB59E400B57008 /* Resources */,
 				221CC39C26A2158E00118D80 /* EnemyLayer */,
 				894BEC7C26A0979A0032BE71 /* PlayerLayer */,
+				B22EB96926B218E5005828D3 /* MapLayer */,
 				894BEC7126A096260032BE71 /* UIElements */,
 				894BEC7026A0960B0032BE71 /* Systems */,
 				894BEC6F26A095F90032BE71 /* HUDLayer */,
@@ -209,6 +207,16 @@
 				89532A3626B0BB7500977B64 /* homeSceneSound.mp3 */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B22EB96926B218E5005828D3 /* MapLayer */ = {
+			isa = PBXGroup;
+			children = (
+				894BEC7826A097770032BE71 /* MapGenerator.swift */,
+				894BEC8326A0C2880032BE71 /* MapData.swift */,
+				89F812FC26A0C56B00AAEEDC /* MapManager.swift */,
+			);
+			path = MapLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = FZWZGGS7F2;
+				DEVELOPMENT_TEAM = 6D5984MR54;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,7 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joh-camacho.endlessNightmare";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -470,7 +478,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = FZWZGGS7F2;
+				DEVELOPMENT_TEAM = 6D5984MR54;
 				INFOPLIST_FILE = endlessNightmare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -481,7 +489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joh-camacho.endlessNightmare";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

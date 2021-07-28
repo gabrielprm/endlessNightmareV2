@@ -58,7 +58,7 @@ class PreSetsEnemy{
     static func generateEnemyLine1() {
         
         let line1 = EnemyGenerator()
-        let diferenca = CGPoint(x: 441 - enemyMasterNode.position.x, y: 371 - enemyMasterNode.position.y)
+        let diferenca = CGPoint(x: 250 - enemyMasterNode.position.x, y: 240 - enemyMasterNode.position.y)
         line1.position = diferenca
         line1.zPosition = 5
         enemyMasterNode.addChild(line1)
@@ -67,7 +67,7 @@ class PreSetsEnemy{
     static func generateEnemyLine2() {
         
         let line2 = EnemyGenerator()
-        let diferenca = CGPoint(x: 482 - enemyMasterNode.position.x, y: 318 - enemyMasterNode.position.y)
+        let diferenca = CGPoint(x: 276 - enemyMasterNode.position.x, y: 190.188 - enemyMasterNode.position.y)
         line2.position = diferenca
         line2.zPosition = 7
         enemyMasterNode.addChild(line2)
@@ -76,7 +76,7 @@ class PreSetsEnemy{
     static func generateEnemyLine3() {
         
         let line3 = EnemyGenerator()
-        let diferenca = CGPoint(x: 533 - enemyMasterNode.position.x, y: 267 - enemyMasterNode.position.y)
+        let diferenca = CGPoint(x: 299.14 - enemyMasterNode.position.x, y: 136.563 - enemyMasterNode.position.y)
         line3.position = diferenca
         line3.zPosition = 10
         enemyMasterNode.addChild(line3)

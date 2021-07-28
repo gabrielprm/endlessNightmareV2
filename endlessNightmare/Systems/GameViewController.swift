@@ -30,15 +30,14 @@ class GameViewController: UIViewController {
             view.ignoresSiblingOrder = true
             
             AssetsReference.instance.preloadAssetsBackground()
-
         }
     }
     
-    func autenticate(){
+    func autenticate() {
         let localPlayer = GKLocalPlayer.local
         
-        localPlayer.authenticateHandler = {view, erro in
-            if view != nil{
+        localPlayer.authenticateHandler = { view, erro in
+            if view != nil {
                 self.present(view!, animated: true, completion: nil)
             }
         }
