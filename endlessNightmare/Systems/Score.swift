@@ -21,7 +21,7 @@ struct TotalScore {
 
 class ScoreCalculator {
     
-    @TotalScore var scoreCounter:Int
+    @TotalScore var scoreCounter: Int
     
     func scoreIncrement(counter: Double) {
         scoreCounter = Int(counter)

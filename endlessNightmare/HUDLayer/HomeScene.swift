@@ -9,16 +9,13 @@ import SpriteKit
 import GameKit
 
 class HomeScene: SKScene, GKGameCenterControllerDelegate {
-    
 
-
-    let haptich = HaptictsManager()
+    let haptics = HapticsManager()
     var gameHomeSound = SKAudioNode(fileNamed: "homeSceneSound")
     var buttonMusic: SKSpriteNode!
     var gameCenter: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        
         buttonMusic = childNode(withName: "music") as? SKSpriteNode
         gameCenter = childNode(withName: "gameCenter") as? SKSpriteNode
         
@@ -36,7 +33,6 @@ class HomeScene: SKScene, GKGameCenterControllerDelegate {
         guard let node = nodes(at: touchLocation).first else { return }
         
         if node == buttonMusic {
-            
             let defaults = UserDefaults.standard
             
             defaults.changeStateMusic()
@@ -48,20 +44,20 @@ class HomeScene: SKScene, GKGameCenterControllerDelegate {
                 gameHomeSound.removeFromParent()
             }
             
+            haptics.oneVibrationHaptic()
         } else if node == gameCenter {
+            haptics.oneVibrationHaptic()
             
             transition()
-            
         } else {
+            haptics.oneVibrationHaptic()
+            
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
-
+            
             gameScene.scaleMode = .aspectFill
-
-            haptich.oneVibrationHaptic()
-
+            
             view!.presentScene(gameScene, transition: transition)
-
         }
     }
     

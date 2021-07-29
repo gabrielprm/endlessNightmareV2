@@ -11,8 +11,8 @@ import GameplayKit
 
 public class MapGenerator: SKSpriteNode{
 
-    init(imageName: String, position: CGPoint, zPosition: CGFloat) {
-        let texture = SKTexture(imageNamed: imageName)
+    init(position: CGPoint, zPosition: CGFloat) {
+        let texture = SKTexture(imageNamed: "Road")
         
         super.init(texture: texture, color: .clear, size: texture.size())
         self.position = position
@@ -21,8 +21,8 @@ public class MapGenerator: SKSpriteNode{
 //        self.setScale(0.9)
     }
     
-    convenience init(imageName: String, zPosition: CGFloat) {
-        self.init(imageName: imageName, position: CGPoint(x: 0, y: 0), zPosition: zPosition)
+    convenience init(zPosition: CGFloat) {
+        self.init(position: CGPoint(x: 0, y: 0), zPosition: zPosition)
     }
     
     required init?(coder aDecoder: NSCoder) {

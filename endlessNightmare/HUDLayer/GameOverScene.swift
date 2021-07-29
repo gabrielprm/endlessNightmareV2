@@ -12,16 +12,16 @@ class GameOverScene: SKScene {
     var buttonHome: SKSpriteNode! = nil
     var buttonReturn: SKSpriteNode! = nil
     var scoreLabel: SKLabelNode! = nil
-    let haptich = HaptictsManager()
-
     var highScoreLabel: SKLabelNode! = nil
+    
     let gameMusic = SKAudioNode(fileNamed: "gameOverSceneSound")
+    let haptics = HapticsManager()
     
     override func didMove(to view: SKView) {
         buttonHome = childNode(withName: "home") as? SKSpriteNode
         buttonReturn = childNode(withName: "return") as? SKSpriteNode
+        
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
-
         scoreLabel.text = "SCORE: \(UserDefaults.standard.integer(forKey: "score") as Int)"
         
         highScoreLabel = childNode(withName: "highScoreLabel") as? SKLabelNode
@@ -39,17 +39,19 @@ class GameOverScene: SKScene {
         guard let node = nodes(at: touchLocation).first else { return }
         
         if node == buttonHome {
+            haptics.oneVibrationHaptic()
+            
             let transition = SKTransition.fade(withDuration: 1.5)
             let homeScene = SKScene(fileNamed: "HomeScene")!
-            haptich.oneVibrationHaptic()
 
             homeScene.scaleMode = .aspectFill
             
             view!.presentScene(homeScene, transition: transition)
         } else if node == buttonReturn {
+            haptics.oneVibrationHaptic()
+            
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
-            haptich.oneVibrationHaptic()
 
             gameScene.scaleMode = .aspectFill
             

@@ -13,8 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     static let instance = GameScene()
 
-    var mapa: SKSpriteNode! = nil
-    var mapa2: SKSpriteNode! = nil
+    var firstMap: SKSpriteNode! = nil
+    var secondMap: SKSpriteNode! = nil
     var character: SKNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var pauseMenu: PauseMenu! = nil
@@ -24,9 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let difficultyMultiplier = DifficultyIncrement()
     let scoreInt = ScoreCalculator()
-    let haptich = HaptictsManager()
+    let haptics = HapticsManager()
 
-    let gameMusic: SKAudioNode = SKAudioNode(fileNamed: "gameSceneSound")
+    let gameMusic = SKAudioNode(fileNamed: "gameSceneSound")
     
     var scoreDisplay: Int {
         return scoreInt.scoreCounter / 60
@@ -41,11 +41,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseMenu = childNode(withName: "pauseMenu") as? PauseMenu
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         
-        mapa = MapGenerator(imageName: "Road", zPosition: 1)
-        addChild(mapa)
+        firstMap = MapGenerator(zPosition: 1)
+        addChild(firstMap)
         
-        mapa2 = MapGenerator(imageName: "Road", position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
-        addChild(mapa2)
+        secondMap = MapGenerator(position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
+        addChild(secondMap)
         
         CharacterManager.rowPosition = 2
         
@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
 
-            MapManager.updateMap(firstMap: mapa, secondMap: mapa2, count: CGFloat(difficultyMultiplier.difficultyCounter))
+            MapManager.updateMap(firstMap: firstMap, secondMap: secondMap, count: CGFloat(difficultyMultiplier.difficultyCounter))
         })
         
         let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
@@ -91,7 +91,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        guard let nodeName = node.name else { return }
         
         if node == buttonPause {
-
             pauseMenu.toggleVisibility()
             buttonPause.isHidden = true
             
@@ -99,10 +98,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameMusic.run(SKAction.pause())
             }
             
+            haptics.oneVibrationHaptic()
+            
             isPausing = true
             buttonPause.isUserInteractionEnabled = true
         } else if node == pauseMenu.buttonPlay {
-            
             pauseMenu.toggleVisibility()
             buttonPause.isHidden = false
             
@@ -110,7 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameMusic.run(SKAction.play())
             }
             
-            haptich.oneVibrationHaptic()
+            haptics.oneVibrationHaptic()
             
             buttonPause.isUserInteractionEnabled = false
             isPausing = false
@@ -127,14 +127,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameMusic.removeFromParent()
             }
             
-            haptich.oneVibrationHaptic()
+            haptics.oneVibrationHaptic()
         } else if node == pauseMenu.buttonHome {
-
+            haptics.oneVibrationHaptic()
+            
             let transition = SKTransition.fade(withDuration: 1.5)
             let gameOverScene = SKScene(fileNamed: "HomeScene")!
             
             gameOverScene.scaleMode = .aspectFill
-            haptich.oneVibrationHaptic()
             view!.presentScene(gameOverScene, transition: transition)
         }
     }
@@ -158,10 +158,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
                 case .up, .left:
-                    haptich.oneVibrationHaptic()
+                    haptics.oneVibrationHaptic()
                     CharacterManager.moveUp(character)
                 case .down, .right:
-                    haptich.oneVibrationHaptic()
+                    haptics.oneVibrationHaptic()
                     CharacterManager.moveDown(character)
                 default:
                     break
@@ -196,7 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         saveScore()
         
-        haptich.twoVibrationHaptic(for: .success)
+        haptics.twoVibrationHaptic(for: .success)
         
         let transition = SKTransition.fade(withDuration: 1.5)
         let gameOverScene = SKScene(fileNamed: "GameOverScene")!
@@ -237,7 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             tick = 0
         }
         
-        if isPausing{
+        if isPausing {
             self.isPaused = true
             return
         }
