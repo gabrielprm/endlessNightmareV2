@@ -52,12 +52,11 @@ class HomeScene: SKScene, GKGameCenterControllerDelegate {
         } else {
             haptics.oneVibrationHaptic()
             
-            let transition = SKTransition.fade(withDuration: 1.5)
             let gameScene = SKScene(fileNamed: "GameScene")!
             
             gameScene.scaleMode = .aspectFill
             
-            view!.presentScene(gameScene, transition: transition)
+            view!.presentScene(gameScene)
         }
     }
     

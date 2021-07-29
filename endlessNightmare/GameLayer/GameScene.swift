@@ -52,6 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character = CharacterGenerator()
         addChild(character)
         
+        
         let enemyMasterNode = PreSetsEnemy.enemyMasterNode
         
         enemyMasterNode.removeAllChildren()
@@ -242,10 +243,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if scoreDisplay < 500 {
+        switch scoreDisplay {
+        case 500...1000:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.6)
-        } else{
+        case 1001...99999999999999999:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.8)
+        default:
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.4)
         }
         
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
