@@ -52,7 +52,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         character = CharacterGenerator()
         addChild(character)
         
-        
         let enemyMasterNode = PreSetsEnemy.enemyMasterNode
         
         enemyMasterNode.removeAllChildren()
@@ -206,14 +205,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         view!.presentScene(gameOverScene, transition: transition)
         
-        if #available(iOS 14.0, *) {
-            points()
-        } else {
-            // Fallback on earlier versions
-        }
+        points()
     }
     
-    @available(iOS 14.0, *)
     func points() {
         if GKLocalPlayer.local.isAuthenticated {
             GKLeaderboard.submitScore(scoreDisplay, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["ThePlan"], completionHandler: { _ in })
