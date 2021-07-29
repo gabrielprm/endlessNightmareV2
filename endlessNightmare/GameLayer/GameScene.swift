@@ -244,10 +244,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         switch scoreDisplay {
-        case 500...1000:
+        case 500...750:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.6)
-        case 1001...99999999999999999:
+        case 750...1250:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.8)
+        case 1250...100000:
+            tick = tick + (difficultyMultiplier.difficultyCounter * 1.0)
         default:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.4)
         }
