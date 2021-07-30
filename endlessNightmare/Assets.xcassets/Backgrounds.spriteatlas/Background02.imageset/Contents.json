@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "EndlessNightmare_Background02_03@1x.png",
+      "filename" : "EndlessNightmare_Fundo02_07@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "EndlessNightmare_Background02_03@2x.png",
+      "filename" : "EndlessNightmare_Fundo02_07@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "EndlessNightmare_Background02_03@3x.png",
+      "filename" : "EndlessNightmare_Fundo02_07@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
