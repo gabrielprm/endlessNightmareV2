@@ -13,16 +13,8 @@ class Background: SKNode {
     var firstBackground: SKSpriteNode! = nil
     var secondBackground: SKSpriteNode! = nil
     
-    override init() {
-        super.init()
-        
-        self.zPosition = -1
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        self.zPosition = -1
         
         firstBackground = childNode(withName: "firstBackground") as? SKSpriteNode
         secondBackground = childNode(withName: "secondBackground") as? SKSpriteNode
