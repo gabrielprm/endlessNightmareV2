@@ -41,6 +41,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseMenu = childNode(withName: "pauseMenu") as? PauseMenu
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         
+        let sparkle1Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleUp, y: MapData.initialYpositionFirstSparkleUp),imageName: "Brilho02")
+        let sparkle2Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleUp, y: MapData.initialYpositionSecondSparkleUp),imageName: "Brilho02")
+        addChild(sparkle1Up)
+        addChild(sparkle2Up)
+
+        let sparkle1Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleDown, y: MapData.initialYpositionFirstSparkleDown),imageName: "Brilho01")
+        let sparkle2Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleDown, y: MapData.initialYpositionSecondSparkleDown),imageName: "Brilho01")
+        addChild(sparkle1Down)
+        addChild(sparkle2Down)
+        
         firstMap = MapGenerator(zPosition: 1)
         addChild(firstMap)
         
@@ -60,6 +70,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(enemyMasterNode)
         
         physicsWorld.contactDelegate = self
+        let initialPositionUp = CGPoint(x: MapData.initialXpositionSecondSparkleUp, y: MapData.initialYpositionSecondSparkleUp)
+        
+        let initialPositionDown = CGPoint(x: MapData.initialXpositionSecondSparkleDown , y: MapData.initialYpositionSecondSparkleDown)
+        
+        let movSparkles = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
+            
+            Sparkles.movSparkles(sparkles1: sparkle1Up, sparkles2: sparkle2Up, count: CGFloat(difficultyMultiplier.difficultyCounter) * 0.2, initialPosition: initialPositionUp)
+            
+            Sparkles.movSparkles(sparkles1: sparkle1Down, sparkles2: sparkle2Down, count: CGFloat(difficultyMultiplier.difficultyCounter) * 0.4, initialPosition: initialPositionDown)
+        })
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
 
@@ -77,6 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         })
         
+        self.run(SKAction.repeatForever(movSparkles))
         self.run(SKAction.repeatForever(movMap))
         scoreLabel.run(SKAction.repeatForever(attPontos))
         
@@ -238,14 +259,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         switch scoreDisplay {
-        case 500...750:
-            tick = tick + (difficultyMultiplier.difficultyCounter * 0.6)
-        case 750...1250:
-            tick = tick + (difficultyMultiplier.difficultyCounter * 0.8)
-        case 1250...100000:
-            tick = tick + (difficultyMultiplier.difficultyCounter * 1.0)
-        default:
+        case 0...500:
             tick = tick + (difficultyMultiplier.difficultyCounter * 0.4)
+        case 500...750:
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.45)
+        case 750...1250:
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.55)
+        default:
+            tick = tick + (difficultyMultiplier.difficultyCounter * 0.65)
         }
         
         EnemyManager.enemyDie(enemyMasterNode: PreSetsEnemy.enemyMasterNode)
