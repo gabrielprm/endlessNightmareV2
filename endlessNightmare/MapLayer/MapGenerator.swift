@@ -5,9 +5,11 @@
 //  Created by Gabriel do Prado Moreira on 15/07/21.
 //
 
+import Foundation
 import SpriteKit
+import GameplayKit
 
-class RoadGenerator: SKSpriteNode{
+public class MapGenerator: SKSpriteNode{
 
     init(position: CGPoint, zPosition: CGFloat) {
         let texture = SKTexture(imageNamed: "Road")

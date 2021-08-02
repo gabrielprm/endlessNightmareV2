@@ -13,8 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     static let instance = GameScene()
 
-    var firstRoad: SKSpriteNode! = nil
-    var secondRoad: SKSpriteNode! = nil
+    var firstMap: SKSpriteNode! = nil
+    var secondMap: SKSpriteNode! = nil
     var character: SKNode! = nil
     var buttonPause: SKSpriteNode! = nil
     var pauseMenu: PauseMenu! = nil
@@ -41,11 +41,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseMenu = childNode(withName: "pauseMenu") as? PauseMenu
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         
-        firstRoad = RoadGenerator(zPosition: 1)
-        addChild(firstRoad)
+        firstMap = MapGenerator(zPosition: 1)
+        addChild(firstMap)
         
-        secondRoad = RoadGenerator(position: CGPoint(x: RoadData.initialXPositionSecondRoad, y: RoadData.initialYPositionSecondRoad), zPosition: 0)
-        addChild(secondRoad)
+        secondMap = MapGenerator(position: CGPoint(x: MapData.initialXPositionSecondMap, y: MapData.initialYPositionSecondMap), zPosition: 0)
+        addChild(secondMap)
         
         CharacterManager.rowPosition = 2
         
@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let movMap = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
 
-            RoadManager.updateRoad(firstRoad: firstRoad, secondRoad: secondRoad, count: CGFloat(difficultyMultiplier.difficultyCounter))
+            MapManager.updateMap(firstMap: firstMap, secondMap: secondMap, count: CGFloat(difficultyMultiplier.difficultyCounter))
         })
         
         let attPontos = SKAction.customAction(withDuration: 1, actionBlock: { [self] node, elapsedTime in
@@ -101,6 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             haptics.oneVibrationHaptic()
             
             isPausing = true
+            buttonPause.isUserInteractionEnabled = true
         } else if node == pauseMenu.buttonPlay {
             pauseMenu.toggleVisibility()
             buttonPause.isHidden = false
@@ -111,6 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             haptics.oneVibrationHaptic()
             
+            buttonPause.isUserInteractionEnabled = false
             isPausing = false
             isPaused = false
         } else if node == pauseMenu.buttonMusic {

@@ -56,7 +56,7 @@ struct EnemyManager {
     }
 
     static func move(enemyMasterNode: SKNode,count:CGFloat ) {
-        enemyMasterNode.run(SKAction.moveBy(x: RoadData.movXCoefficient * count, y: RoadData.movYCoefficient * count, duration: 0.1))
+        enemyMasterNode.run(SKAction.moveBy(x: MapData.movXCoefficient * count, y: MapData.movYCoefficient * count, duration: 0.1))
     }
     
 }

@@ -13,7 +13,7 @@ struct CoefficientOfVelocityCalculator {
     var wrappedValue: Double {
         get { return coefficient }
         set {
-            coefficient = log(newValue) * -Double(RoadData.movXCoefficient) * 0.9
+            coefficient = log(newValue) * -Double(MapData.movXCoefficient) * 0.9
         }
     }
 }
