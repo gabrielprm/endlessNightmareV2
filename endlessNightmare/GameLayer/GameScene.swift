@@ -41,13 +41,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseMenu = childNode(withName: "pauseMenu") as? PauseMenu
         scoreLabel = childNode(withName: "scoreLabel") as? SKLabelNode
         
-        let sparkle1Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleUp, y: MapData.initialYpositionFirstSparkleUp),imageName: "Brilho02")
-        let sparkle2Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleUp, y: MapData.initialYpositionSecondSparkleUp),imageName: "Brilho02")
+        let sparkle1Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleUp, y: MapData.initialYpositionFirstSparkleUp),imageName: "Sparkle02")
+        let sparkle2Up = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleUp, y: MapData.initialYpositionSecondSparkleUp),imageName: "Sparkle02")
         addChild(sparkle1Up)
         addChild(sparkle2Up)
 
-        let sparkle1Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleDown, y: MapData.initialYpositionFirstSparkleDown),imageName: "Brilho01")
-        let sparkle2Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleDown, y: MapData.initialYpositionSecondSparkleDown),imageName: "Brilho01")
+        let sparkle1Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionFirstSparkleDown, y: MapData.initialYpositionFirstSparkleDown),imageName: "Sparkle01")
+        let sparkle2Down = SparklesGenerator(position: CGPoint(x: MapData.initialXpositionSecondSparkleDown, y: MapData.initialYpositionSecondSparkleDown),imageName: "Sparkle01")
         addChild(sparkle1Down)
         addChild(sparkle2Down)
         

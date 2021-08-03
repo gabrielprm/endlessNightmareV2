@@ -12,9 +12,20 @@ class EnemyGenerator: SKSpriteNode {
     init() {
         let firstTexture = SKTexture(imageNamed: "Moth01")
         let secondTexture = SKTexture(imageNamed: "Moth02")
-        let textures = [firstTexture, secondTexture]
+        let thirdTexture = SKTexture(imageNamed: "Moth03")
+        let fourthTexture = SKTexture(imageNamed: "Moth04")
+        var textures: [SKTexture]
         
-        super.init(texture: firstTexture, color: .clear, size: firstTexture.size())
+        let random = Int.random(in: 1...2)
+        
+        switch random {
+        case 1:
+            textures = [firstTexture, secondTexture]
+        default:
+            textures = [thirdTexture, fourthTexture]
+        }
+        
+        super.init(texture: firstTexture, color: .clear, size: textures[0].size())
         
 //        setScale(0.75)
         

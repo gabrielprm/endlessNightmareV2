@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "EndlessNightmare_BadMoth01_06@1x.png",
+      "filename" : "EndlessNightmare_BadMoth04_06@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "EndlessNightmare_BadMoth01_06@2x.png",
+      "filename" : "EndlessNightmare_BadMoth04_06@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "EndlessNightmare_BadMoth01_06@3x.png",
+      "filename" : "EndlessNightmare_BadMoth04_06@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
